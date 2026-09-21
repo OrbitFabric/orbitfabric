@@ -12,9 +12,11 @@
 
 OrbitFabric is a model-first Mission Data Fabric for small spacecraft.
 
+Within the wider OrbitFabric ecosystem, this repository is referred to as **OrbitFabric Core**: the semantic authority that loads, validates, exercises and exports the Mission Data Contract through explicit engineering boundaries.
+
 It provides a disciplined way to define a spacecraft Mission Data Contract once and reuse the same validated semantics across software integration, documentation, host-side scenario evidence, generated contract artifacts, machine-readable inspection surfaces and external ecosystem integrations.
 
-OrbitFabric is intentionally not a flight software framework, ground segment, mission control system or spacecraft simulator. Its job is narrower and more foundational: keep mission data semantics explicit, consistent, reviewable and reusable across the engineering lifecycle.
+OrbitFabric Core is intentionally not a flight software framework, ground segment, mission control system or spacecraft simulator. Its job is narrower and more foundational: keep mission data semantics explicit, consistent, reviewable and reusable across the engineering lifecycle.
 
 ## Why OrbitFabric exists
 
@@ -317,42 +319,25 @@ There is intentionally no unified provider-neutral `orbitfabric adapter install 
 
 See [Adapter Manager M0](docs/reference/adapter-manager-m0.md), [Adapter Project Lock M1](docs/reference/adapter-project-lock-m1.md), [Explicit-Source Install from Adapter Project Lock](docs/reference/adapter-install-from-lock-explicit-source.md) and [Adapter Catalog CLI](docs/reference/adapter-catalog-cli.md).
 
-## OrbitFabric ecosystem
+## Place in the OrbitFabric ecosystem
 
-OrbitFabric Core is the semantic authority of a wider, deliberately separated ecosystem.
+OrbitFabric Core is the semantic authority at the center of the wider [OrbitFabric ecosystem](https://github.com/OrbitFabric).
 
-### OrbitFabric Core
+Studio, the Reference Mission, integration adapters and adapter-management infrastructure consume, exercise or distribute Core-owned contracts without becoming parallel sources of mission semantics.
 
-This repository. It defines, validates, exercises and exports the Mission Data Contract and owns the provider-neutral Adapter Management lifecycle boundaries.
-
-### OrbitFabric Studio
-
-[OrbitFabric Studio](https://github.com/FAROTECH/orbitfabric-studio) is a local-first engineering workbench for seeing and understanding OrbitFabric missions.
-
-Studio consumes Core-owned facts and may organize, navigate and visualize them. It must not become a second Mission Model interpreter or invent missing semantics.
+The ownership rule remains:
 
 ```text
-Core owns the fact.
-Studio makes the fact understandable.
+Core owns mission semantics.
+Studio makes Core-owned facts understandable.
+Adapters own explicit target-specific projection.
+External systems remain authoritative for native behavior.
+Evidence bounds the claims made about each integration.
 ```
 
-### OrbitFabric Reference Mission
+This repository therefore documents **Core itself**: the Mission Data Contract, validation and linting, scenario evidence, generated and machine-readable surfaces, integration boundaries, compatibility posture and provider-neutral adapter lifecycle semantics.
 
-[OrbitFabric Reference Mission](https://github.com/FAROTECH/orbitfabric-reference-mission) is a realistic, synthetic small-spacecraft engineering workspace used to demonstrate and validate the Core and Studio workflow.
-
-It is not flight software, not a real mission configuration and not a spacecraft simulator.
-
-### OrbitFabric Adapter Catalog
-
-[OrbitFabric Adapter Catalog](https://github.com/FAROTECH/orbitfabric-adapter-catalog) is the public data product that records available exact adapter releases and their source bindings using the Core-owned Catalog format.
-
-Catalog membership is not by itself a trust or endorsement statement.
-
-### GitHub Release Source
-
-[OrbitFabric GitHub Release Source](https://github.com/FAROTECH/orbitfabric-github-release-source) is the first provider-specific Release Source product. It resolves exact Catalog-selected releases through GitHub Releases and hands verified release material into the Core lifecycle.
-
-It remains outside Core so GitHub-specific acquisition does not become a Core dependency or semantic boundary.
+For the complete ecosystem map, the role of each public repository and recommended entry points, see the [OrbitFabric GitHub Organization](https://github.com/OrbitFabric).
 
 ## Current Core version and compatibility posture
 
