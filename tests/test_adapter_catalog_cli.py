@@ -44,7 +44,7 @@ def _catalog_payload() -> dict[str, object]:
             {
                 "id": "github-fprime",
                 "provider": "github-release",
-                "config": {"repository": "FAROTECH/orbitfabric-fprime-adapter"},
+                "config": {"repository": "OrbitFabric/orbitfabric-fprime-adapter"},
             }
         ],
     }
