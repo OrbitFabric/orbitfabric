@@ -100,20 +100,20 @@ def _catalog_payload() -> dict[str, object]:
                 "id": "github-openobsw",
                 "provider": "github-release",
                 "config": {
-                    "repository": "FAROTECH/orbitfabric-openobsw-opensvf-adapter"
+                    "repository": "OrbitFabric/orbitfabric-openobsw-opensvf-adapter"
                 },
             },
             {
                 "id": "github-cosmos",
                 "provider": "github-release",
                 "config": {
-                    "repository": "FAROTECH/orbitfabric-openc3-cosmos-adapter"
+                    "repository": "OrbitFabric/orbitfabric-openc3-cosmos-adapter"
                 },
             },
             {
                 "id": "github-fprime",
                 "provider": "github-release",
-                "config": {"repository": "FAROTECH/orbitfabric-fprime-adapter"},
+                "config": {"repository": "OrbitFabric/orbitfabric-fprime-adapter"},
             },
         ],
     }
@@ -155,7 +155,7 @@ def test_exact_source_coordinate_and_version_select_one_release() -> None:
     assert len(selection.sources) == 1
     assert selection.sources[0].binding.provider == "github-release"
     assert selection.sources[0].binding.config == {
-        "repository": "FAROTECH/orbitfabric-fprime-adapter"
+        "repository": "OrbitFabric/orbitfabric-fprime-adapter"
     }
     assert selection.sources[0].release_ref == "v0.1.1"
 
