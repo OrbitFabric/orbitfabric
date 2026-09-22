@@ -455,7 +455,7 @@ OrbitFabric CI validates Python 3.11 and Python 3.12.
 ### Install from source
 
 ```bash
-git clone https://github.com/FAROTECH/orbitfabric.git
+git clone https://github.com/OrbitFabric/orbitfabric.git
 cd orbitfabric
 
 python3 -m venv .venv
@@ -546,7 +546,7 @@ OrbitFabric development follows a few strict rules:
 
 Public documentation:
 
-https://farotech.github.io/orbitfabric/
+https://orbitfabric.github.io/orbitfabric/
 
 Recommended reading paths:
 

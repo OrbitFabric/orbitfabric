@@ -230,7 +230,7 @@ The Core boundary is provider-neutral. Provider-specific Release Sources remain 
 
 ### I want to contribute
 
-Read the repository [Contributing Guide](https://github.com/FAROTECH/orbitfabric/blob/main/CONTRIBUTING.md) and [Clean-Room Policy](CLEAN_ROOM_POLICY.md).
+Read the repository [Contributing Guide](https://github.com/OrbitFabric/orbitfabric/blob/main/CONTRIBUTING.md) and [Clean-Room Policy](CLEAN_ROOM_POLICY.md).
 
 ## Project boundaries
 

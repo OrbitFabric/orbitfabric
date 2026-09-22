@@ -53,7 +53,7 @@ The CI validates Python 3.11 and Python 3.12.
 ## 2. Clone the repository
 
 ```bash
-git clone https://github.com/FAROTECH/orbitfabric.git
+git clone https://github.com/OrbitFabric/orbitfabric.git
 cd orbitfabric
 ```
 
