@@ -315,7 +315,7 @@ orbitfabric adapter catalog list
 orbitfabric adapter catalog select
 ```
 
-There is intentionally no unified provider-neutral `orbitfabric adapter install <logical-adapter> --version ...` command yet. Defining provider registration/dispatch from one provider would generalize too early.
+The 1.4.0 candidate composes the supported GitHub acquisition package with Core lifecycle management through `orbitfabric adapter install <adapter> --version <exact-version>`. See [public onboarding](docs/reference/public-adapter-onboarding.md) for distribution, exact selection and Catalog snapshot provenance.
 
 See [Adapter Manager M0](docs/reference/adapter-manager-m0.md), [Adapter Project Lock M1](docs/reference/adapter-project-lock-m1.md), [Explicit-Source Install from Adapter Project Lock](docs/reference/adapter-install-from-lock-explicit-source.md) and [Adapter Catalog CLI](docs/reference/adapter-catalog-cli.md).
 

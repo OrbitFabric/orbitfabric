@@ -49,12 +49,12 @@ Validation uses the Core-owned `AdapterCatalog` model. It does not define a seco
 orbitfabric adapter catalog list path/to/catalog.json
 ```
 
-Example output:
+Historical and current entries can appear together (historical coordinates remain unchanged):
 
 ```text
 github.com/FAROTECH:orbitfabric/openobsw-opensvf@0.1.0
 github.com/FAROTECH:orbitfabric/openc3-cosmos@0.1.0
-github.com/FAROTECH:orbitfabric/fprime@0.1.1
+github.com/OrbitFabric:orbitfabric/openc3-cosmos@0.2.0
 ```
 
 JSON output returns the corresponding Core Catalog adapter records:
@@ -70,8 +70,8 @@ The first CLI requires the complete Adapter Source Coordinate and exact release 
 ```bash
 orbitfabric adapter catalog select \
   path/to/catalog.json \
-  github.com/FAROTECH:orbitfabric/fprime \
-  --version 0.1.1
+  github.com/OrbitFabric:orbitfabric/openc3-cosmos \
+  --version 0.2.0
 ```
 
 The identity is deliberately explicit:
@@ -93,8 +93,8 @@ Machine-readable selection:
 ```bash
 orbitfabric adapter catalog select \
   path/to/catalog.json \
-  github.com/FAROTECH:orbitfabric/fprime \
-  --version 0.1.1 \
+  github.com/OrbitFabric:orbitfabric/openc3-cosmos \
+  --version 0.2.0 \
   --json
 ```
 

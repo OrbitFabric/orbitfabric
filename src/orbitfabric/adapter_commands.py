@@ -44,18 +44,14 @@ def _fail(exc: Exception) -> None:
 
 @adapter_app.command("install")
 def install_adapter(
-    release_descriptor: Annotated[
-        Path,
+    adapter: Annotated[
+        str,
         typer.Argument(
-            exists=True,
-            file_okay=True,
-            dir_okay=False,
-            readable=True,
-            help="Exact Adapter Release Descriptor JSON file.",
+            help="Adapter identity with --version, or local Release Descriptor with --artifact.",
         ),
     ],
     artifact: Annotated[
-        Path,
+        Path | None,
         typer.Option(
             "--artifact",
             exists=True,
@@ -64,7 +60,7 @@ def install_adapter(
             readable=True,
             help="Exact local adapter artifact referenced by the release descriptor.",
         ),
-    ],
+    ] = None,
     artifact_id: Annotated[
         str | None,
         typer.Option(
@@ -83,24 +79,60 @@ def install_adapter(
         bool,
         typer.Option("--json", help="Write the installed record as JSON."),
     ] = False,
+    version: Annotated[str | None, typer.Option("--version", help="Exact Catalog release.")] = None,
+    catalog: Annotated[
+        Path | None, typer.Option("--catalog", help="Explicit local Catalog snapshot.")
+    ] = None,
+    catalog_revision: Annotated[
+        str | None, typer.Option("--catalog-revision", help="Exact canonical Catalog commit SHA.")
+    ] = None,
 ) -> None:
-    """Install one exact adapter release through the explicit-source lane."""
+    """Install an exact Catalog release or explicit local release material."""
+    snapshot = None
     try:
-        record = _manager().install(
-            release_descriptor,
-            artifact,
-            artifact_id=artifact_id,
-            expected_descriptor_sha256=descriptor_sha256,
-        )
-    except AdapterManagerError as exc:
+        if version is not None:
+            if artifact is not None or descriptor_sha256 is not None:
+                raise ValueError("--version cannot be combined with --artifact/--descriptor-sha256")
+            from orbitfabric.adapter_onboarding import install_from_catalog
+
+            record, snapshot = install_from_catalog(
+                adapter,
+                version,
+                catalog_path=catalog,
+                revision=catalog_revision,
+                artifact_id=artifact_id,
+                manager=_manager(),
+            )
+        else:
+            if artifact is None or catalog is not None or catalog_revision is not None:
+                raise ValueError("Use --version for Catalog installation, or --artifact locally")
+            record = _manager().install(
+                adapter,
+                artifact,
+                artifact_id=artifact_id,
+                expected_descriptor_sha256=descriptor_sha256,
+            )
+    except (AdapterManagerError, ValueError) as exc:
         _fail(exc)
         return
 
     if json_output:
-        _json_echo(record)
+        if snapshot is None:
+            _json_echo(record)
+        else:
+            _json_echo(
+                {
+                    "installed": record.model_dump(mode="json"),
+                    "catalog_snapshot": snapshot.provenance(),
+                }
+            )
         return
+    if snapshot is not None:
+        typer.echo(f"Catalog: {snapshot.repository or snapshot.path}")
+        typer.echo(f"Catalog revision: {snapshot.revision or 'local file'}")
+        typer.echo(f"Catalog SHA-256: {snapshot.sha256}")
     typer.echo(f"Installed adapter instance: {record.instance_id}")
-    typer.echo("Release: " f"{record.source_coordinate.display()}@{record.release_version}")
+    typer.echo(f"Release: {record.source_coordinate.display()}@{record.release_version}")
     typer.echo(f"Backend: {record.backend_id}")
     if record.acceptance_warnings:
         typer.echo("Acceptance warnings:")
@@ -354,14 +386,9 @@ def check_adapter_project_lock(
             label = f"{adapter.source_coordinate.display()}@{adapter.release_version}"
             typer.echo(f"{label}: {adapter.status}")
             if adapter.matching_instance_ids:
-                typer.echo(
-                    "  matching instances: " + ", ".join(adapter.matching_instance_ids)
-                )
+                typer.echo("  matching instances: " + ", ".join(adapter.matching_instance_ids))
             for mismatch in adapter.candidate_mismatches:
-                typer.echo(
-                    f"  {mismatch.instance_id}: mismatch "
-                    + ", ".join(mismatch.dimensions)
-                )
+                typer.echo(f"  {mismatch.instance_id}: mismatch " + ", ".join(mismatch.dimensions))
         typer.echo(f"Project state: {report.status}")
     if not report.passed:
         raise typer.Exit(code=1)

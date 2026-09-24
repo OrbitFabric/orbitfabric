@@ -21,7 +21,7 @@ def _catalog_payload() -> dict[str, object]:
         "adapters": [
             {
                 "source_coordinate": {
-                    "authority": "github.com/FAROTECH",
+                    "authority": "github.com/OrbitFabric",
                     "publisher": "orbitfabric",
                     "name": "openobsw-opensvf",
                 },
@@ -46,7 +46,7 @@ def _catalog_payload() -> dict[str, object]:
             },
             {
                 "source_coordinate": {
-                    "authority": "github.com/FAROTECH",
+                    "authority": "github.com/OrbitFabric",
                     "publisher": "orbitfabric",
                     "name": "openc3-cosmos",
                 },
@@ -71,7 +71,7 @@ def _catalog_payload() -> dict[str, object]:
             },
             {
                 "source_coordinate": {
-                    "authority": "github.com/FAROTECH",
+                    "authority": "github.com/OrbitFabric",
                     "publisher": "orbitfabric",
                     "name": "fprime",
                 },
@@ -125,7 +125,7 @@ def _catalog() -> AdapterCatalog:
 
 def _fprime_coordinate() -> AdapterSourceCoordinate:
     return AdapterSourceCoordinate(
-        authority="github.com/FAROTECH",
+        authority="github.com/OrbitFabric",
         publisher="orbitfabric",
         name="fprime",
     )
@@ -170,7 +170,7 @@ def test_exact_version_matching_does_not_normalize_provider_ref_or_version() -> 
 def test_unknown_source_coordinate_fails_closed() -> None:
     catalog = _catalog()
     coordinate = AdapterSourceCoordinate(
-        authority="github.com/FAROTECH",
+        authority="github.com/OrbitFabric",
         publisher="orbitfabric",
         name="missing",
     )
@@ -192,7 +192,7 @@ def test_logical_key_selects_only_when_one_authority_matches() -> None:
         release_version="0.1.1",
     )
 
-    assert selection.source_coordinate.authority == "github.com/FAROTECH"
+    assert selection.source_coordinate.authority == "github.com/OrbitFabric"
 
 
 def test_logical_key_fails_when_two_authorities_publish_same_key() -> None:

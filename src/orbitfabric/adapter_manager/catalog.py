@@ -147,11 +147,12 @@ def select_exact_release_by_logical_key(
         for adapter in catalog.adapters
         if adapter.source_coordinate.publisher == publisher
         and adapter.source_coordinate.name == name
+        and any(release.version == release_version for release in adapter.releases)
     ]
     if len(adapters) != 1:
         raise ReleaseResolutionError(
-            "Expected one Catalog Source Coordinate for logical key "
-            f"{publisher}/{name}, found {len(adapters)}"
+            "Expected one exact Catalog release for logical key "
+            f"{publisher}/{name}@{release_version}, found {len(adapters)}"
         )
     return select_exact_release(
         catalog,
