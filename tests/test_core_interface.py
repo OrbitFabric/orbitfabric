@@ -38,7 +38,7 @@ def test_manifest_schema_and_expected_capabilities() -> None:
     }
     assert manifest["kind"] == CORE_INTERFACE_KIND
     assert manifest["interface_version"] == CORE_INTERFACE_VERSION
-    assert manifest["orbitfabric_version"] == "1.3.0"
+    assert manifest["orbitfabric_version"] == "1.4.0"
     assert len(manifest["interface_sha256"]) == 64
     assert all(
         set(capability) == {"id", "contract_kind", "contract_version"}

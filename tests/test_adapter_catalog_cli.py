@@ -9,7 +9,7 @@ from typer.testing import CliRunner
 from orbitfabric.entrypoint import app
 
 DESCRIPTOR_SHA = "724eb67299150887167dfce8aa3ea117a163c79b6fcaff6ab105dfd35daf7464"
-SOURCE_COORDINATE = "github.com/FAROTECH:orbitfabric/fprime"
+SOURCE_COORDINATE = "github.com/OrbitFabric:orbitfabric/fprime"
 
 
 def _catalog_payload() -> dict[str, object]:
@@ -19,7 +19,7 @@ def _catalog_payload() -> dict[str, object]:
         "adapters": [
             {
                 "source_coordinate": {
-                    "authority": "github.com/FAROTECH",
+                    "authority": "github.com/OrbitFabric",
                     "publisher": "orbitfabric",
                     "name": "fprime",
                 },
@@ -124,7 +124,7 @@ def test_catalog_select_exact_release_json(tmp_path: Path) -> None:
     assert result.exit_code == 0
     payload = json.loads(result.stdout)
     assert payload["source_coordinate"] == {
-        "authority": "github.com/FAROTECH",
+        "authority": "github.com/OrbitFabric",
         "publisher": "orbitfabric",
         "name": "fprime",
     }
@@ -147,7 +147,7 @@ def test_catalog_select_unknown_coordinate_fails_closed(tmp_path: Path) -> None:
             "catalog",
             "select",
             str(catalog),
-            "github.com/FAROTECH:orbitfabric/missing",
+            "github.com/OrbitFabric:orbitfabric/missing",
             "--version",
             "0.1.1",
         ],

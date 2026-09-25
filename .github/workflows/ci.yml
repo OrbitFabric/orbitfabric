@@ -29,6 +29,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install -e ".[dev]"
+          python -m pip install --no-deps https://github.com/OrbitFabric/orbitfabric-github-release-source/archive/372e4bdfea1116f53f616ad1b236ad0f1cfbff5d.zip
 
       - name: Ruff
         run: ruff check .
@@ -160,7 +161,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Prove same product version and different interface availability
+      - name: Prove historical interface absence and current interface availability
         run: |
           H4_HISTORICAL_ENV="$(mktemp -d)/historical"
           H4_CANDIDATE_ENV="$(mktemp -d)/candidate"
@@ -170,7 +171,7 @@ jobs:
           "$H4_CANDIDATE_ENV/bin/python" -m pip install .
 
           test "$("$H4_HISTORICAL_ENV/bin/orbitfabric" --version)" = "orbitfabric 1.3.0"
-          test "$("$H4_CANDIDATE_ENV/bin/orbitfabric" --version)" = "orbitfabric 1.3.0"
+          test "$("$H4_CANDIDATE_ENV/bin/orbitfabric" --version)" = "orbitfabric 1.4.0"
 
           if "$H4_HISTORICAL_ENV/bin/orbitfabric" export core-interface --json /tmp/h4-historical.json; then
             echo "Historical v1.3.0 unexpectedly exposed the Core Interface Manifest"
@@ -186,7 +187,7 @@ jobs:
           manifest = json.loads(Path("/tmp/h4-candidate.json").read_text(encoding="utf-8"))
           assert manifest["kind"] == "orbitfabric.core_interface"
           assert manifest["interface_version"] == "0.1-candidate"
-          assert manifest["orbitfabric_version"] == "1.3.0"
+          assert manifest["orbitfabric_version"] == "1.4.0"
           capabilities = {item["id"]: item for item in manifest["capabilities"]}
           assert capabilities["scenario_declaration"] == {
               "id": "scenario_declaration",
