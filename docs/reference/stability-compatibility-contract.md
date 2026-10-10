@@ -1,6 +1,6 @@
 # Stability and Compatibility Contract
 
-Status: Active v1.x contract through v1.3.0  
+Status: Active v1.x classification contract through published Core v1.4.0  
 Scope: stable, candidate, disposable and internal compatibility classification  
 Applies to: OrbitFabric Core from `v1.0.0 - Stable Mission Data Contract` onward
 
@@ -57,7 +57,7 @@ An internal detail is not a public compatibility surface and may change while do
 
 ---
 
-## 4. Stable Core classification through v1.3.0
+## 4. Stable Core classification through v1.4.0
 
 Stable Mission Data Contract and Core integration surfaces include:
 
@@ -82,11 +82,11 @@ The seven FDIR Relationship Manifest families admitted in v1.2.0 are additive st
 
 The Mission Snapshot and Integration Input Set retain their `0.1-candidate` format identifiers. Stability classification and format-version identifiers are separate compatibility concepts.
 
-v1.3.0 does not promote any additional Mission Data Contract surface to stable.
+Neither v1.3.0 nor v1.4.0 promotes any additional Mission Data Contract surface to stable. The newer release adds candidate declarations and evidence-related contracts, not changes to stable Mission Model semantics.
 
 ---
 
-## 5. Candidate surfaces after v1.3.0
+## 5. Candidate surfaces in Core v1.4.0
 
 These Core-owned inspection surfaces remain candidate:
 
@@ -116,9 +116,23 @@ explicit-source install-from-lock
 source-neutral ResolvedAdapterRelease attachment
 Adapter Catalog 0.1-candidate
 Adapter Catalog CLI
+v1.4.0 exact GitHub onboarding CLI composition
 ```
 
-Candidate status means usable and documented, but not silently promoted into the stable Mission Data Contract merely because Core v1.3.0 is a stable package release.
+The additional candidate interfaces in v1.4.0 are:
+
+```text
+Core Interface Manifest 0.1-candidate
+Scenario Declaration Surface 0.1-candidate
+Scenario Projection Accounting 0.1-candidate
+Evidence Set Manifest 0.1-candidate
+```
+
+The Core Interface Manifest declares capability ids and contract identities independently from the Core package version. The Scenario Declaration Surface exposes Core-normalized **authored** Scenario intent and exact source provenance, not execution observations.
+
+Scenario Projection Accounting is an optional Result-owned artifact; the adapter owns disposition claims and local mapping associations. Missing accounting means unavailable projection disposition. Evidence Set Manifest is a generic integrity and correlation contract whose curator owns inclusion and whose producers own evidence contents and native meaning.
+
+Candidate status means documented and usable but not silently promoted into the stable Mission Data Contract by a published Core release.
 
 ---
 
@@ -150,6 +164,8 @@ cache/mirror transport policy
 ```
 
 A provider-specific Release Source may acquire and verify exact release material outside Core and hand a complete `ResolvedAdapterRelease` into the Core lifecycle.
+
+Core v1.4.0 composes one explicit `orbitfabric adapter install NAME --version EXACT` GitHub onboarding workflow. The Core CLI selects an exact Catalog release, resolves a commit-pinned canonical Catalog or an explicit snapshot, delegates provider transport to the separately distributed GitHub Release Source and retains installation ownership in the Core manager. This is not a universal provider registry or automatic-upgrade mechanism.
 
 Provider locators and mutable transport metadata must not silently become Project Lock identity.
 
@@ -229,7 +245,7 @@ project desired state
 
 A Catalog selector resolves one exact release before provider acquisition. A Release Source resolves exact bytes before Core installation. Project Lock remains exact desired identity and does not absorb mutable provider locators or local installation paths.
 
-The absence of one unified provider-neutral install command in v1.3.0 is intentional. Core does not generalize a universal provider dispatch protocol from the first provider implementation.
+At the v1.3.0 baseline, Core did not offer the v1.4.0 public GitHub onboarding composition. The newer exact install command does not introduce universal provider dispatch or require a Project Lock. Project Lock remains the separate mechanism for portable project desired state.
 
 ---
 
@@ -254,7 +270,7 @@ Unless separately documented as stable, the following remain outside compatibili
 
 ## 12. Current non-goals
 
-The v1.3 boundary does not introduce:
+The v1.4 boundary does not introduce:
 
 ```text
 Core plugin discovery/loading
@@ -280,4 +296,4 @@ Adapter Manager may execute an installed external adapter through the documented
 
 OrbitFabric v1.x means a stable Mission Data Contract framework with explicit compatibility governance.
 
-v1.3.0 preserves the stable Mission Data Contract and v1.2 Core Integration Input boundary while adding candidate, provider-neutral Adapter Management capabilities. Package stability does not silently promote those candidate lifecycle contracts, and provider-specific acquisition remains outside Core.
+v1.3.0 introduced candidate provider-neutral Adapter Management capabilities. Published Core v1.4.0 adds exact GitHub onboarding and separately versioned candidate interface and evidence contracts. Neither release silently promotes those contracts to stable or moves provider-specific acquisition implementation into the Core Adapter Manager.
