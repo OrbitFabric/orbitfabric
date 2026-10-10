@@ -1,7 +1,7 @@
 # OrbitFabric - Roadmap
 
-Version: v1.3.0 Adapter Management Foundation  
-Status: v1.3.0 release baseline under final readiness review  
+Version: v1.4.0 Core Interface and Public Adapter Onboarding  
+Status: v1.4.0 published product baseline; candidate contracts remain independently classified  
 Scope: stable Mission Data Contract, stable Core integration input boundary, candidate Integration Framework contracts and candidate Adapter Management foundation
 
 ---
@@ -33,7 +33,9 @@ The v1.1.0 release consolidated post-v1 Core-owned candidate inspection surfaces
 
 The v1.2.0 release consolidated the Core-owned integration input boundary proven through external reference adapters and independent Studio consumption, without adding Mission Model semantics.
 
-The v1.3.0 release adds the first provider-neutral Adapter Management foundation while preserving those stable semantics and keeping provider-specific acquisition outside Core.
+The v1.3.0 release added the first provider-neutral Adapter Management foundation while preserving those stable semantics and keeping provider-specific acquisition outside Core.
+
+The published v1.4.0 release adds a GitHub Release-based exact public onboarding route through the Core CLI, along with candidate Core Interface, Scenario Declaration, Scenario Projection Accounting and Evidence Set surfaces. It does not widen the stable Mission Data Contract.
 
 ---
 
@@ -65,13 +67,14 @@ post-v1.1 Mission Snapshot + additive FDIR relationships          completed / cl
 Phase B  Generic Integration Framework contracts                 completed / reference-proven
 v1.2.0  Core Integration Input Consolidation                     completed
 post-v1.2 Adapter Manager / Lock / Release Source / Catalog       completed / candidate productized
-v1.3.0  Adapter Management Foundation                            release readiness
+v1.3.0  Adapter Management Foundation                            completed
+v1.4.0  Core Interface and Public Adapter Onboarding             completed / published
 ```
 
-The release candidate baseline is:
+The current published product baseline is:
 
 ```text
-v1.3.0 - Adapter Management Foundation
+v1.4.0 - Core Interface and Public Adapter Onboarding
 ```
 
 ---
@@ -170,7 +173,7 @@ Studio and other downstream tools consume, navigate and render.
 Downstream tools must not invent private coverage, health or completeness semantics.
 ```
 
-These surfaces remain candidate after v1.3.0 unless a separate compatibility decision promotes them.
+These surfaces remain candidate in v1.4.0 unless a separate compatibility decision promotes them.
 
 They do not change the v1.0.0 stable Mission Data Contract.
 
@@ -371,7 +374,7 @@ Core Catalog CLI
 
 The first provider product is the separate GitHub Release Source. It depends on Core `>=1.3,<2` and remains outside Core.
 
-The absence of a single provider-neutral install-from-Catalog command is deliberate. A universal provider registration/dispatch protocol is deferred until more than one materially different provider can justify the abstraction.
+As of v1.3.0, no one-command public Catalog-to-install composition was available. v1.4.0 now provides the explicit GitHub route through `orbitfabric adapter install NAME --version EXACT`, while generic provider registration/dispatch remains deferred. This historical distinction must not be read as an absence of the v1.4 command.
 
 ### Maturity
 
@@ -391,7 +394,35 @@ A `1.3.0` package release does not make these surfaces part of the stable Missio
 
 ---
 
-## 10. Post-v1.3 Direction
+## 10. v1.4.0 Published Core Interface and Public Onboarding
+
+v1.4.0 is published as a Core product release, with independently published GitHub Release Source 0.1.0 and F Prime Adapter 0.1.3 releases. The Core release includes `orbitfabric-install.txt` for exact, SHA-256-pinned Core and provider wheels. The canonical Catalog contains the exact F Prime 0.1.3 Release Descriptor digest.
+
+```text
+canonical Catalog (exact commit or local snapshot)
+    -> exact adapter identity and version selection
+    -> external GitHub Release Source acquisition and integrity checks
+    -> Core Adapter Manager installation / verification / installed state
+```
+
+The Core CLI composes this supported provider-specific route; the generic Adapter Manager does not absorb GitHub transport or establish a provider dispatch framework. Local explicit-source installation and Project Lock semantics remain available.
+
+The release also adds independently classified candidate interfaces:
+
+```text
+Core Interface Manifest 0.1-candidate
+Scenario Declaration Surface 0.1-candidate
+Scenario Projection Accounting 0.1-candidate
+Evidence Set Manifest 0.1-candidate
+```
+
+Core publishes generic structured facts, schema and conformance. Adapters still own projection claims, curators own retained evidence inclusion and native systems own their runtime observations.
+
+The GitHub Release metadata verifies that distribution assets are published, not that any fresh clean-machine installation has executed successfully. Refer to the dedicated onboarding workflow and acceptance evidence for that claim.
+
+---
+
+## 11. Post-v1.4 Direction
 
 Post-v1 work must preserve the same discipline:
 
@@ -425,7 +456,7 @@ additional Studio integration contribution families after concrete forcing funct
 
 ---
 
-## 11. Backlog Parking Lot
+## 12. Backlog Parking Lot
 
 These ideas remain outside the stable Core boundary unless separately designed, implemented, tested and classified:
 
@@ -470,11 +501,23 @@ automatic adapter upgrades
 
 ---
 
-## 12. Final Roadmap Statement
+## Reference boundaries
 
-OrbitFabric v1.3.0 is the current release candidate baseline.
+- [Core v1.4.0 release notes](releases/v1.4.0.md)
+- [Public Adapter Onboarding](reference/public-adapter-onboarding.md)
+- [Core Interface Manifest](reference/core-interface-manifest.md)
+- [Scenario Declaration Surface](reference/scenario-declaration-surface.md)
+- [Scenario Projection Accounting Contract](reference/scenario-projection-accounting-contract.md)
+- [Evidence Set Manifest Contract](reference/evidence-set-manifest-contract.md)
+- [Stability and Compatibility Contract](reference/stability-compatibility-contract.md)
 
-OrbitFabric v1.0.0 remains the origin of the stable Mission Data Contract commitment. v1.2.0 extended that stable boundary with the Core-owned integration input surfaces. v1.3.0 adds a candidate external adapter lifecycle without changing those stable semantics.
+---
+
+## 13. Final Roadmap Statement
+
+OrbitFabric Core v1.4.0 is the current published product baseline.
+
+OrbitFabric v1.0.0 remains the origin of the stable Mission Data Contract commitment. v1.2.0 extended that stable boundary with the Core-owned integration input surfaces. v1.3.0 added the candidate external adapter lifecycle. v1.4.0 adds a narrow public GitHub onboarding composition and candidate structured declarations and evidence contracts, without changing the stable model semantics.
 
 The architectural statement is:
 

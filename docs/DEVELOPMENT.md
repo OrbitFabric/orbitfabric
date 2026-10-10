@@ -5,10 +5,10 @@ This document explains how to work on OrbitFabric locally.
 OrbitFabric is currently released at:
 
 ```text
-v1.3.0 - Adapter Management Foundation
+v1.4.0 - Core Interface and Public Adapter Onboarding
 ```
 
-The stable Mission Data Contract commitment originated with `v1.0.0`; v1.2.0 extended it additively with the stable Core integration input boundary and no new Mission Model semantics. v1.3.0 preserves those stable semantics and adds candidate operation-input and provider-neutral Adapter Management capabilities.
+The stable Mission Data Contract commitment originated with `v1.0.0`; v1.2.0 extended it additively with the stable Core integration input boundary and no new Mission Model semantics. v1.3.0 preserves those stable semantics and adds candidate operation-input and provider-neutral Adapter Management capabilities. Published Core v1.4.0 adds exact GitHub adapter onboarding composition, a candidate Core Interface Manifest, a candidate Scenario Declaration export, and generic candidate Scenario Projection Accounting and Evidence Set contracts. None of these promote candidate contracts into stable guarantees.
 
 The v1.1.0 dashboard, scenario-run, coverage and structured-expectation surfaces remain candidate. Projection Profile, Integration Result, Integration Package / Adapter Execution, operation-input v1 and the v1.3 Adapter Management surfaces remain independently classified candidate contracts/product surfaces unless separately promoted.
 
@@ -61,7 +61,7 @@ orbitfabric adapter --help
 Expected current package version:
 
 ```text
-orbitfabric 1.3.0
+orbitfabric 1.4.0
 ```
 
 ---
@@ -206,11 +206,11 @@ orbitfabric export scenario-run-index \
 orbitfabric export coverage-summary examples/demo-3u/mission/
 ```
 
-These surfaces remain candidate after v1.3.0 and must not be treated as dashboard backend behavior, Studio API behavior, downstream-specific generation, graph behavior, runtime behavior or ground behavior.
+These surfaces remain candidate in v1.4.0 and must not be treated as dashboard backend behavior, Studio API behavior, downstream-specific generation, graph behavior, runtime behavior or ground behavior.
 
 ---
 
-## Verify the v1.3 candidate Adapter Management surface
+## Verify the candidate Adapter Management surface in v1.4
 
 Inspect the Core-owned command groups:
 
@@ -249,11 +249,34 @@ external Release Source
   ResolvedAdapterRelease handoff
 ```
 
-Do not add GitHub, registry or other provider-specific acquisition behavior to Core merely to simplify the CLI.
+Core v1.4.0 supports one explicit application-level GitHub acquisition path through `orbitfabric adapter install NAME --version EXACT`, backed by the separately distributed GitHub Release Source. Do not move GitHub, registry or other provider-specific acquisition into the Core Adapter Manager merely to simplify the CLI.
 
 Do not infer a universal provider registration/dispatch protocol from the first provider implementation. That abstraction remains deferred until materially different provider evidence exists.
 
 When adding Adapter Management behavior, preserve fail-closed exact identity checks and keep Project Lock free from local paths, instance ids and mutable provider locators.
+
+---
+
+## Verify v1.4 candidate declarations and generic evidence contracts
+
+Inspect the mission-independent Core Interface Manifest:
+
+```bash
+orbitfabric export core-interface --json examples/demo-3u/generated/reports/core_interface.json
+```
+
+Export the normalized authored Scenario declaration, which is **not** execution evidence:
+
+```bash
+orbitfabric export scenario-declaration examples/demo-3u/scenarios/payload_data_flow_evidence.yaml \
+  --json examples/demo-3u/generated/reports/payload_data_flow_declaration.json
+```
+
+The exported kinds and wire versions are `orbitfabric.core_interface` / `0.1-candidate` and `orbitfabric.scenario_declaration` / `0.1-candidate`. Core's product version is provenance and does not replace contract capability/version negotiation.
+
+Scenario Projection Accounting is an adapter-declared, Integration Result-owned candidate artifact; check it using the documented conformance module and exact parent/result/Scenario context. The Evidence Set Manifest is a separately candidate generic integrity/correlation contract; do not infer retained evidence meaning from its schema alone. See their reference contracts rather than fabricating sample runtime observations in the Core demo.
+
+The [v1.4.0 release notes](releases/v1.4.0.md) and [Public Adapter Onboarding](reference/public-adapter-onboarding.md) document the released wheel distribution and exact Catalog route. Repository-development installs use `python -m pip install -e ".[dev]"` and are distinct from no-clone public wheel installs. The latter requires external published release assets and network access; it is not a source checkout test.
 
 ---
 
@@ -335,7 +358,7 @@ Do not add runtime or ground integration artifacts before the relevant contract 
 
 Do not import ecosystem Integration Adapter implementation code inside Core. Adapter Manager execution uses an installed external entrypoint through the documented adapter execution contract.
 
-Do not add provider-specific Release Source acquisition to Core. Provider-specific products must resolve exact bytes externally and hand a verified `ResolvedAdapterRelease` into the Core lifecycle.
+Do not implement provider-specific Release Source transport inside the Core Adapter Manager. Core's v1.4 CLI may explicitly compose the external GitHub provider and hand verified `ResolvedAdapterRelease` material into the existing Core lifecycle. This narrow supported composition is not general provider dispatch.
 
 Do not turn the Extensibility Boundary Contract into in-process plugin discovery/loading/execution without a separate architectural review.
 
@@ -364,6 +387,18 @@ mkdocs serve
 ```
 
 The public site is deployed by the GitHub Pages workflow after pushes to `main`.
+
+---
+
+## Reference boundaries
+
+- [Core v1.4.0 release notes](releases/v1.4.0.md)
+- [Public Adapter Onboarding](reference/public-adapter-onboarding.md)
+- [Core Interface Manifest](reference/core-interface-manifest.md)
+- [Scenario Declaration Surface](reference/scenario-declaration-surface.md)
+- [Scenario Projection Accounting Contract](reference/scenario-projection-accounting-contract.md)
+- [Evidence Set Manifest Contract](reference/evidence-set-manifest-contract.md)
+- [Stability and Compatibility Contract](reference/stability-compatibility-contract.md)
 
 ---
 
