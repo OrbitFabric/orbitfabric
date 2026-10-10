@@ -1,6 +1,8 @@
 # Public adapter onboarding
 
-This is the coordinated **unpublished** Core 1.4.0 / GitHub Release Source 0.1.0 / F Prime 0.1.3 candidate. The commands below become public acceptance commands only after approved publication and the exact F Prime descriptor digest is added to the canonical Catalog. No PyPI publication is assumed.
+Status: **Published GitHub Release-based product onboarding (2026-09-25)**. Core [1.4.0](https://github.com/OrbitFabric/orbitfabric/releases/tag/v1.4.0), [GitHub Release Source 0.1.0](https://github.com/OrbitFabric/orbitfabric-github-release-source/releases/tag/v0.1.0), and [F Prime Adapter 0.1.3](https://github.com/OrbitFabric/orbitfabric-fprime-adapter/releases/tag/v0.1.3) are published releases, not unpublished candidates. **Their adapter lifecycle and integration contract surfaces retain candidate maturity.** No PyPI publication is assumed.
+
+The canonical Catalog currently includes `github.com/OrbitFabric:orbitfabric/fprime@0.1.3` with Release Descriptor SHA-256 `b5e078ccf5a8ae61575b1a69dd6dafcf925cdebb4900e20c25a27efffdf23be1`, matching GitHub's published descriptor asset digest. Catalog `main` may change: select an exact `--catalog-revision` or local snapshot when repeatability matters.
 
 ## Clean Python 3.11+ environment
 
@@ -36,6 +38,10 @@ orbitfabric adapter install ./adapter-release.json --artifact ./adapter.whl
 
 Project Locks remain exact reproducible project desired state. Existing ensure MATCH returns NOOP without acquisition. Snapshot provenance describes Catalog bytes; it does not turn Catalog membership into publisher authentication.
 
-## Release order
+## Published release record and acceptance boundary
 
-Prepare and review all candidates before tagging. After approval: publish GitHub Release Source 0.1.0, Core 1.4.0 (including its generated installation manifest), then F Prime 0.1.3. Add the SHA-256 of the exact published descriptor to the Catalog, retaining historical entries. Only then run the public clean-environment commands above against GitHub. Candidate replay tests before publication exercise real wheels, provider integrity and Core lifecycle while substituting only unavailable release HTTP responses; they are not evidence of public asset availability.
+The coordinated release sequence completed on **2026-09-25**: GitHub Release Source 0.1.0, Core 1.4.0 with its installation manifest, and F Prime Adapter 0.1.3. The exact published F Prime Release Descriptor digest is present in the canonical Catalog, while historical entries remain available.
+
+The [Core release assets](https://github.com/OrbitFabric/orbitfabric/releases/tag/v1.4.0) include the wheel, source distribution, `orbitfabric-install.txt`, and `SHA256SUMS`. The GitHub Release API confirms public publication and uploaded assets. The published download manifest uses exact wheel hashes; a separate clean-environment replay remains necessary to establish end-to-end installation acceptance. Pre-publication candidate replay tests are not a substitute for that test.
+
+Core ownership does not change: the external GitHub Release Source fetches and verifies provider release bytes, while Core validates resolved release identity and owns installation and installed state. Adapter-related contracts remain candidate even though the coordinated **products** are publicly released.

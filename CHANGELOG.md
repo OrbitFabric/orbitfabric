@@ -8,8 +8,27 @@ This project follows a lightweight changelog style for the Mission Model, contra
 
 ## [Unreleased]
 
-- Added the candidate mission-independent Core Interface Manifest with deterministic capability ordering and RFC 8785/JCS SHA-256 identity.
-- Preserved product version `1.3.0` as provenance separate from structured-interface identity.
+- Align published v1.4.0 documentation, public onboarding instructions and MkDocs discovery after the release. No product, schema, CLI or contract changes.
+
+## [v1.4.0] - 2026-09-25
+
+### Added
+
+- Added exact Catalog-based GitHub adapter onboarding through `orbitfabric adapter install NAME --version EXACT`, composing Core lifecycle management with the external GitHub Release Source 0.1.0.
+- Added commit-pinned or local Catalog snapshot acquisition, exact identity/version selection, and explicit selection/provenance in structured installation output.
+- Published Core wheel and source distribution with `orbitfabric-install.txt` for SHA-256-pinned Core and GitHub Release Source wheels and `SHA256SUMS` through GitHub Releases.
+- Added the candidate mission-independent Core Interface Manifest with deterministic capability ordering and RFC 8785/JCS SHA-256 identity, exported using `orbitfabric export core-interface`.
+- Added the candidate Scenario Declaration Surface for Core-normalized declared Scenario atoms, exact source SHA-256 and structured failures.
+- Added the candidate generic Scenario Projection Accounting contract and four-domain conformance checking for adapter-declared atom dispositions bound to an Integration Result.
+- Added the candidate generic Evidence Set Manifest contract, schema and conformance checks for retained evidence identities, typed correlations and byte integrity.
+- Added targeted regression and onboarding checks, supporting reference documentation and ADR-0022/ADR-0023.
+
+### Compatibility impact
+
+- Preserved the stable Mission Data Contract and v1.2 Core Integration Input Set semantics; no Mission Model semantic migration is introduced.
+- Kept the Core Interface Manifest, Scenario Declaration, accounting, evidence-set and adapter lifecycle/integration extension surfaces candidate unless separately promoted.
+- Preserved product-version provenance separately from Core Interface Manifest identity. Contract maturity and independent wire version remain separate from package version.
+- Kept GitHub/provider-specific acquisition outside the Core Adapter Manager lifecycle and kept local explicit-source and Project Lock workflows available.
 
 ## [v1.3.0] - 2026-09-04
 
