@@ -82,16 +82,9 @@ A Mission Data Contract describes, in a structured and machine-readable way:
 - downlink priorities and contact assumptions;
 - commandability constraints;
 - autonomy and recovery expectations;
-- operational scenarios;
-- validation and linting rules;
-- runtime-facing generated contract bindings;
-- ground-facing generated integration artifacts;
-- Core-owned structured surfaces;
-- stable Core integration input contracts;
-- stability and compatibility classifications;
-- extensibility boundary rules.
+- validation and linting constraints on the declared Mission Model.
 
-The Mission Model is the semantic source of truth for all derived Core artifacts. Operational Scenarios are separate authored host-side evidence inputs; they must not be mistaken for Mission Model content. Likewise, generated artifacts and integration contract surfaces are outputs and interfaces, not additional Mission Model semantics.
+The Mission Model is the semantic source of truth for all derived Core artifacts. Operational Scenarios are separate authored host-side evidence inputs and must not be mistaken for Mission Model content. Runtime-facing bindings, ground-facing integration artifacts, Core-owned structured exports, external integration contracts and compatibility classifications are derived products or governance surfaces, not additional Mission Model semantics.
 
 Adapter Management is not a second semantic model. It tracks exact Integration Package release identity, project-scoped desired state, user-scoped installed state and lifecycle verification.
 
@@ -322,19 +315,23 @@ These define reviewed boundaries but do not become stable Mission Data Contract 
 
 ## 10. Stable External Integration Boundary
 
-The stable input direction introduced in v1.2 is:
+The stable Core input and candidate extension ownership are:
 
 ```text
 Mission Model
-    ↓
-OrbitFabric Core
-    ↓
-coherent Core Integration Input Set
-    ↓
-external Integration Package / Adapter
-    ↓
-Projection Profile + target-native artifacts + Integration Result
+    -> OrbitFabric Core
+    -> coherent Core Integration Input Set -----------+
+                                                     |
+authored Projection Profile -------------------------+
+                                                     |
+                                                     v
+                              external Integration Package / Adapter
+                                      |                  |
+                                      v                  v
+                              target-native artifacts   Integration Result
 ```
+
+The Projection Profile is an authored adapter-side input, not a product generated downstream from execution. The diagram describes input and output ownership, not a requirement that adapters execute in any particular order.
 
 Core does not import ecosystem-specific adapter implementation code in-process.
 
@@ -348,17 +345,23 @@ Adapter Manager may execute an installed Integration Package through the documen
 
 ## 11. Adapter Management Boundary
 
-The candidate v1.3 lifecycle is:
+The candidate Adapter Management boundaries are:
 
 ```text
-Adapter Project Lock
-    -> provider-neutral exact Adapter Catalog selection
-    -> provider-specific Release Source outside Core
-    -> verified ResolvedAdapterRelease
+exact adapter identity + version
+    -> Core Catalog exact selection
+    -> external provider acquisition + verified ResolvedAdapterRelease
     -> Core installation lifecycle
     -> Installed Adapter State
     -> verify / execute / remove
+
+optional Project Lock
+    -> project-scoped exact desired state
+    -> comparison with installed state
+    -> explicit installation from verified release material where required
 ```
+
+A Project Lock is not required for the v1.4.0 public GitHub installation command. It remains the separate portable desired-state mechanism.
 
 Core must remain provider-neutral.
 

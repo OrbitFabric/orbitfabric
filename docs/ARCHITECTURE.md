@@ -343,7 +343,7 @@ OrbitFabric
 │   ├── telemetry / commands / events / faults / packets
 │   ├── payload / data-product / storage contracts
 │   ├── contact / downlink contracts
-│   ├── commandability / autonomy contracts
+│   └── commandability / autonomy contracts
 │
 ├── Operational Scenarios (separate authored evidence inputs)
 │

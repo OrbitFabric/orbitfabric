@@ -276,7 +276,7 @@ The exported kinds and wire versions are `orbitfabric.core_interface` / `0.1-can
 
 Scenario Projection Accounting is an adapter-declared, Integration Result-owned candidate artifact; check it using the documented conformance module and exact parent/result/Scenario context. The Evidence Set Manifest is a separately candidate generic integrity/correlation contract; do not infer retained evidence meaning from its schema alone. See their reference contracts rather than fabricating sample runtime observations in the Core demo.
 
-The [v1.4.0 release notes](releases/v1.4.0.md) and [Public Adapter Onboarding](reference/public-adapter-onboarding.md) document the released wheel distribution and exact Catalog route. Repository-development installs use `pip install -e ".[dev]"` and are distinct from no-clone public wheel installs. The latter requires external published release assets and network access; it is not a source checkout test.
+The [v1.4.0 release notes](releases/v1.4.0.md) and [Public Adapter Onboarding](reference/public-adapter-onboarding.md) document the released wheel distribution and exact Catalog route. Repository-development installs use `python -m pip install -e ".[dev]"` and are distinct from no-clone public wheel installs. The latter requires external published release assets and network access; it is not a source checkout test.
 
 ---
 
