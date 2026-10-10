@@ -1,7 +1,7 @@
 # Payload Contract Model Announcement
 
 Status: communication draft  
-Scope: OrbitFabric v0.2.2 — Payload Contract Release Alignment  
+Scope: OrbitFabric v0.2.2 - Payload Contract Release Alignment  
 Audience: GitHub, LinkedIn, technical network
 
 ---

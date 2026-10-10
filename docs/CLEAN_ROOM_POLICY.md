@@ -1,4 +1,4 @@
-# OrbitFabric — Clean-Room Policy
+# OrbitFabric - Clean-Room Policy
 
 Version: 0.3-draft
 Status: Draft

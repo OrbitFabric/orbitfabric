@@ -1,4 +1,4 @@
-# ADR-0007 — Mission Data Chain Before Runtime Generation
+# ADR-0007 - Mission Data Chain Before Runtime Generation
 
 Status: Accepted  
 Date: 2026-05-01

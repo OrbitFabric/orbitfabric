@@ -1,4 +1,4 @@
-# ADR-0005 — Lint as a Core Feature
+# ADR-0005 - Lint as a Core Feature
 
 Status: Accepted  
 Date: 2026-04-29  

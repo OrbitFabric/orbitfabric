@@ -1,4 +1,4 @@
-# ADR-0004 — No Flight Runtime in v0.1
+# ADR-0004 - No Flight Runtime in v0.1
 
 Status: Accepted  
 Date: 2026-04-29  
@@ -179,7 +179,7 @@ This ADR only blocks flight runtime implementation in v0.1.
 
 ## Alternatives Considered
 
-### Alternative 1 — Implement a Minimal C++ Runtime in v0.1
+### Alternative 1 - Implement a Minimal C++ Runtime in v0.1
 
 Build a small C++ runtime with telemetry, commands, events, modes and faults.
 
@@ -187,7 +187,7 @@ Rejected.
 
 This would look attractive but would be strategically wrong. A minimal runtime would still require many premature design choices and would distract from Mission Model quality.
 
-### Alternative 2 — Generate C++ Headers in v0.1
+### Alternative 2 - Generate C++ Headers in v0.1
 
 Generate enum IDs, telemetry IDs and command IDs from the model.
 
@@ -195,7 +195,7 @@ Rejected for v0.1.
 
 This may be a good v0.3 milestone, but it is not needed to prove the first vertical slice.
 
-### Alternative 3 — Build a Python Runtime and Treat It as the Reference Runtime
+### Alternative 3 - Build a Python Runtime and Treat It as the Reference Runtime
 
 Use the Python simulator as the official runtime semantics.
 
@@ -205,7 +205,7 @@ The Python simulator is a validation and demonstration tool. It must not become 
 
 The Mission Model is the source of truth.
 
-### Alternative 4 — Integrate with an Existing Flight Framework Immediately
+### Alternative 4 - Integrate with an Existing Flight Framework Immediately
 
 Generate cFS or F Prime artifacts in v0.1.
 
@@ -213,7 +213,7 @@ Rejected.
 
 This would make OrbitFabric dependent on external ecosystems before its own model is stable.
 
-### Alternative 5 — No Runtime-Like Components at All
+### Alternative 5 - No Runtime-Like Components at All
 
 Avoid even simulator runtime concepts such as command router and event bus.
 

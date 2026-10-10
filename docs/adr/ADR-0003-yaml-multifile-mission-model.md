@@ -1,4 +1,4 @@
-# ADR-0003 — YAML Multi-File Mission Model
+# ADR-0003 - YAML Multi-File Mission Model
 
 Status: Accepted  
 Date: 2026-04-29  
@@ -164,7 +164,7 @@ These are compatibility features, not v0.1 requirements.
 
 ## Alternatives Considered
 
-### Alternative 1 — Single YAML File
+### Alternative 1 - Single YAML File
 
 Use one `mission.yaml` file containing everything.
 
@@ -174,7 +174,7 @@ This would be simpler for the first parser, but it would scale poorly and encour
 
 A single-file format may be supported later as an optional compact format, but it must not be the canonical v0.1 structure.
 
-### Alternative 2 — JSON Files
+### Alternative 2 - JSON Files
 
 Use JSON instead of YAML.
 
@@ -184,7 +184,7 @@ JSON is machine-friendly but less pleasant for humans to write and review. It do
 
 JSON may still be used for generated exports and reports.
 
-### Alternative 3 — TOML Files
+### Alternative 3 - TOML Files
 
 Use TOML for the Mission Model.
 
@@ -192,7 +192,7 @@ Rejected for v0.1.
 
 TOML is readable for configuration, but the nested structures required for telemetry, commands, faults and scenarios are better represented in YAML.
 
-### Alternative 4 — Custom DSL
+### Alternative 4 - Custom DSL
 
 Create an OrbitFabric-specific modeling language.
 
@@ -200,7 +200,7 @@ Rejected.
 
 A custom DSL would increase implementation effort, documentation burden and adoption friction. It is unjustified before proving the Mission Data Contract concept.
 
-### Alternative 5 — Python-as-Configuration
+### Alternative 5 - Python-as-Configuration
 
 Define missions directly in Python objects.
 
@@ -208,7 +208,7 @@ Rejected.
 
 This would make the model executable code rather than a portable mission contract. It would also make it harder to consume from other languages and tools.
 
-### Alternative 6 — Database-Backed Model
+### Alternative 6 - Database-Backed Model
 
 Store the Mission Model in a relational or document database.
 

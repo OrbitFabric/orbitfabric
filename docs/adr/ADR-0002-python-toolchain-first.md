@@ -1,4 +1,4 @@
-# ADR-0002 — Python Toolchain First
+# ADR-0002 - Python Toolchain First
 
 Status: Accepted  
 Date: 2026-04-29  
@@ -137,7 +137,7 @@ This is acceptable because they serve different roles.
 
 ## Alternatives Considered
 
-### Alternative 1 — C++ First
+### Alternative 1 - C++ First
 
 Start OrbitFabric directly in C++17.
 
@@ -147,7 +147,7 @@ C++ will likely be relevant for future onboard runtime generation, but it is the
 
 Using C++ too early would slow down iteration and bias the model toward implementation details.
 
-### Alternative 2 — Rust First
+### Alternative 2 - Rust First
 
 Start with Rust for strong typing, safety and modern tooling.
 
@@ -155,7 +155,7 @@ Rejected for v0.1.
 
 Rust is technically attractive, but it raises the contribution barrier for the initial target audience and is not necessary to prove the Mission Data Contract concept.
 
-### Alternative 3 — TypeScript First
+### Alternative 3 - TypeScript First
 
 Start with TypeScript for schema-oriented tooling and web-friendly integration.
 
@@ -163,7 +163,7 @@ Rejected for v0.1.
 
 TypeScript could be useful for future web tooling, but OrbitFabric v0.1 is primarily a CLI, linting, simulation and documentation toolchain. Python is more natural for this phase.
 
-### Alternative 4 — Go First
+### Alternative 4 - Go First
 
 Start with Go for simple binaries and good CLI distribution.
 
@@ -171,7 +171,7 @@ Rejected for v0.1.
 
 Go would provide good tooling and distribution, but Python provides better immediate flexibility for model iteration, validation and scientific/engineering scripting workflows.
 
-### Alternative 5 — Mixed Python/C++ from the Start
+### Alternative 5 - Mixed Python/C++ from the Start
 
 Build the toolchain in Python and immediately generate or compile C++ runtime code.
 

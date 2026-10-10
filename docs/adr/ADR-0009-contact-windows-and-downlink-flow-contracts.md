@@ -1,4 +1,4 @@
-# ADR-0009 — Contact Windows and Downlink Flow Contracts
+# ADR-0009 - Contact Windows and Downlink Flow Contracts
 
 Status: Accepted  
 Date: 2026-05-04
