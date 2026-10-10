@@ -6,7 +6,6 @@ theme:
   name: material
   features:
     - navigation.sections
-    - navigation.expand
     - content.code.copy
 
 nav:
@@ -81,52 +80,56 @@ nav:
           - v1.2 Integration Input Stability Decision: reference/v1.2-integration-input-stability-decision.md
           - JSON Reports v0.1: reference/json-reports-v0.1.md
   - Releases:
-      - v0.2.2 Payload Contract Release Alignment: releases/v0.2.2.md
-      - v0.3.0 Data Product and Storage Contracts: releases/v0.3.0.md
-      - v0.4.0 Contact Windows and Downlink Flow Contracts: releases/v0.4.0.md
-      - v0.5.0 Commandability and Autonomy Contracts: releases/v0.5.0.md
-      - v0.6.0 End-to-End Mission Data Flow Evidence: releases/v0.6.0.md
-      - v0.7.0 Generated Runtime Skeletons: releases/v0.7.0.md
-      - v0.8.0 Ground Integration Artifacts: releases/v0.8.0.md
-      - v0.8.1 Contract Introspection Surface: releases/v0.8.1.md
-      - v0.8.2 Entity Index Surface: releases/v0.8.2.md
-      - v0.9.0 Relationship Manifest Surface and Extensibility Boundary: releases/v0.9.0.md
-      - v0.10.0 Stability and Compatibility Contract: releases/v0.10.0.md
-      - v0.10.1 Documentation and Published Site Consistency: releases/v0.10.1.md
-      - v0.11.0 Extensibility Boundary Contract, no execution: releases/v0.11.0.md
-      - v0.12.0 v1.0 Release Candidate Hardening: releases/v0.12.0.md
-      - v1.0.0 Stable Mission Data Contract: releases/v1.0.0.md
-      - v1.1.0 Candidate Integration Surface Consolidation: releases/v1.1.0.md
-      - v1.2.0 Core Integration Input Consolidation: releases/v1.2.0.md
-      - v1.3.0 Adapter Management Foundation: releases/v1.3.0.md
-      - v1.4.0 Core Interface and Public Adapter Onboarding: releases/v1.4.0.md
-  - Communication:
-      - Payload Contract Model Announcement: comms/payload-contract-model-announcement.md
-
+      - Release Guide: releases/index.md
+      - Current Release:
+          - v1.4.0 Core Interface and Public Adapter Onboarding: releases/v1.4.0.md
+      - Previous v1.x Releases:
+          - v1.0.0 Stable Mission Data Contract: releases/v1.0.0.md
+          - v1.1.0 Candidate Integration Surface Consolidation: releases/v1.1.0.md
+          - v1.2.0 Core Integration Input Consolidation: releases/v1.2.0.md
+          - v1.3.0 Adapter Management Foundation: releases/v1.3.0.md
+      - Historical v0.x Releases:
+          - v0.2.2 Payload Contract Release Alignment: releases/v0.2.2.md
+          - v0.3.0 Data Product and Storage Contracts: releases/v0.3.0.md
+          - v0.4.0 Contact Windows and Downlink Flow Contracts: releases/v0.4.0.md
+          - v0.5.0 Commandability and Autonomy Contracts: releases/v0.5.0.md
+          - v0.6.0 End-to-End Mission Data Flow Evidence: releases/v0.6.0.md
+          - v0.7.0 Generated Runtime Skeletons: releases/v0.7.0.md
+          - v0.8.0 Ground Integration Artifacts: releases/v0.8.0.md
+          - v0.8.1 Contract Introspection Surface: releases/v0.8.1.md
+          - v0.8.2 Entity Index Surface: releases/v0.8.2.md
+          - v0.9.0 Relationship Manifest Surface and Extensibility Boundary: releases/v0.9.0.md
+          - v0.10.0 Stability and Compatibility Contract: releases/v0.10.0.md
+          - v0.10.1 Documentation and Published Site Consistency: releases/v0.10.1.md
+          - v0.11.0 Extensibility Boundary Contract, no execution: releases/v0.11.0.md
+          - v0.12.0 v1.0 Release Candidate Hardening: releases/v0.12.0.md
   - ADR:
-      - ADR-0001 Mission Model First: adr/ADR-0001-mission-model-first.md
-      - ADR-0002 Python Toolchain First: adr/ADR-0002-python-toolchain-first.md
-      - ADR-0003 YAML Multi-File Mission Model: adr/ADR-0003-yaml-multifile-mission-model.md
-      - ADR-0004 No Flight Runtime in v0.1: adr/ADR-0004-no-flight-runtime-in-v0.1.md
-      - ADR-0005 Lint as Core Feature: adr/ADR-0005-lint-as-core-feature.md
-      - ADR-0006 Payload Contract Model: adr/ADR-0006-payload-contract-model.md
-      - ADR-0007 Mission Data Chain Before Runtime: adr/ADR-0007-mission-data-chain-before-runtime.md
-      - ADR-0008 Data Product and Storage Contracts: adr/ADR-0008-data-product-and-storage-contracts.md
-      - ADR-0009 Contact Windows and Downlink Flow Contracts: adr/ADR-0009-contact-windows-and-downlink-flow-contracts.md
-      - ADR-0010 Commandability and Autonomy Contracts: adr/ADR-0010-commandability-and-autonomy-contracts.md
-      - ADR-0011 Generated Runtime Skeleton Boundary: adr/ADR-0011-generated-runtime-skeleton-boundary.md
-      - ADR-0012 Ground Integration Artifacts Boundary: adr/ADR-0012-ground-integration-artifacts-boundary.md
-      - ADR-0013 Contract Introspection Surfaces: adr/ADR-0013-contract-introspection-surfaces.md
-      - ADR-0014 v0.9 Plugin and Relationship Surface Boundaries: adr/ADR-0014-v0-9-plugin-and-relationship-surface-boundaries.md
-      - ADR-0015 Extensibility Boundary Contract, No Execution: adr/ADR-0015-extensibility-boundary-contract-no-execution.md
-      - ADR-0016 Versioned Operation-Input Contract Lane: adr/ADR-0016-operation-input-contract-v1.md
-      - ADR-0017 Adapter Manager M0 Lifecycle Boundary: adr/ADR-0017-adapter-manager-m0-lifecycle-boundary.md
-      - ADR-0018 Adapter Project Lock M1: adr/ADR-0018-adapter-project-lock-m1.md
-      - ADR-0019 Explicit-Source Install-from-Lock Boundary: adr/ADR-0019-explicit-source-install-from-lock-boundary.md
-      - ADR-0020 Source-Neutral Release Attachment Seam: adr/ADR-0020-source-neutral-release-attachment-seam.md
-      - ADR-0021 Adapter Catalog Exact Selection Boundary: adr/ADR-0021-adapter-catalog-exact-selection-boundary.md
-      - ADR-0022 Result-Owned Scenario Projection Accounting: adr/ADR-0022-scenario-projection-accounting.md
-      - ADR-0023 Core Interface Manifest: adr/ADR-0023-core-interface-manifest.md
+      - Mission Model and Foundations:
+          - ADR-0001 Mission Model First: adr/ADR-0001-mission-model-first.md
+          - ADR-0002 Python Toolchain First: adr/ADR-0002-python-toolchain-first.md
+          - ADR-0003 YAML Multi-File Mission Model: adr/ADR-0003-yaml-multifile-mission-model.md
+          - ADR-0004 No Flight Runtime in v0.1: adr/ADR-0004-no-flight-runtime-in-v0.1.md
+          - ADR-0005 Lint as Core Feature: adr/ADR-0005-lint-as-core-feature.md
+      - Core Contracts and Integration:
+          - ADR-0006 Payload Contract Model: adr/ADR-0006-payload-contract-model.md
+          - ADR-0007 Mission Data Chain Before Runtime: adr/ADR-0007-mission-data-chain-before-runtime.md
+          - ADR-0008 Data Product and Storage Contracts: adr/ADR-0008-data-product-and-storage-contracts.md
+          - ADR-0009 Contact Windows and Downlink Flow Contracts: adr/ADR-0009-contact-windows-and-downlink-flow-contracts.md
+          - ADR-0010 Commandability and Autonomy Contracts: adr/ADR-0010-commandability-and-autonomy-contracts.md
+          - ADR-0011 Generated Runtime Skeleton Boundary: adr/ADR-0011-generated-runtime-skeleton-boundary.md
+          - ADR-0012 Ground Integration Artifacts Boundary: adr/ADR-0012-ground-integration-artifacts-boundary.md
+          - ADR-0013 Contract Introspection Surfaces: adr/ADR-0013-contract-introspection-surfaces.md
+          - ADR-0014 v0.9 Plugin and Relationship Surface Boundaries: adr/ADR-0014-v0-9-plugin-and-relationship-surface-boundaries.md
+          - ADR-0015 Extensibility Boundary Contract, No Execution: adr/ADR-0015-extensibility-boundary-contract-no-execution.md
+          - ADR-0016 Versioned Operation-Input Contract Lane: adr/ADR-0016-operation-input-contract-v1.md
+      - Adapter Lifecycle and Interfaces:
+          - ADR-0017 Adapter Manager M0 Lifecycle Boundary: adr/ADR-0017-adapter-manager-m0-lifecycle-boundary.md
+          - ADR-0018 Adapter Project Lock M1: adr/ADR-0018-adapter-project-lock-m1.md
+          - ADR-0019 Explicit-Source Install-from-Lock Boundary: adr/ADR-0019-explicit-source-install-from-lock-boundary.md
+          - ADR-0020 Source-Neutral Release Attachment Seam: adr/ADR-0020-source-neutral-release-attachment-seam.md
+          - ADR-0021 Adapter Catalog Exact Selection Boundary: adr/ADR-0021-adapter-catalog-exact-selection-boundary.md
+          - ADR-0022 Result-Owned Scenario Projection Accounting: adr/ADR-0022-scenario-projection-accounting.md
+          - ADR-0023 Core Interface Manifest: adr/ADR-0023-core-interface-manifest.md
 
 markdown_extensions:
   - admonition
