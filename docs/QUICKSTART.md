@@ -1,34 +1,56 @@
 # Quickstart
 
-This guide shows how to run OrbitFabric locally from the current repository baseline.
+**Get a first successful OrbitFabric Core result using a synthetic Mission Model.**
 
-OrbitFabric is a model-first Mission Data Fabric for small spacecraft.
+This guide uses the **Core repository checkout**, which contains the demo mission and scenarios. Core v1.4.0 is the current published product release. The Mission Data Contract has a stable v1.x semantic boundary; not every interface or generated output is stable.
 
-The current public release is:
+## First run: the short path
 
-```text
-v1.3.0 - Adapter Management Foundation
-```
+**Requirements:** Python 3.11+ and Git. On Linux/macOS:
 
-The stable Mission Data Contract commitment originated with:
+~~~bash
+git clone https://github.com/OrbitFabric/orbitfabric.git
+cd orbitfabric
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[dev]"
 
-```text
-v1.0.0 - Stable Mission Data Contract
-```
+orbitfabric --version
+orbitfabric inspect mission examples/demo-3u/mission/
+orbitfabric lint examples/demo-3u/mission/
+orbitfabric sim examples/demo-3u/scenarios/battery_low_during_payload.yaml
+~~~
 
-v1.2.0 extended that stable boundary additively with the Mission Snapshot and coherent Core Integration Input Set, without changing Mission Model semantics. v1.3.0 preserves those stable semantics and adds candidate operation-input and provider-neutral Adapter Management capabilities.
+At the checked-out v1.4.0 baseline, the CLI prints `orbitfabric 1.4.0`; the three demo operations should end with `Result: PASSED`. The repository's `main` branch can evolve after this release, so trust the version reported by the installed executable.
 
-The v1.1.0 dashboard, scenario-run, coverage and structured-expectation surfaces remain candidate unless separately promoted. The v1.3 Adapter Management contracts and CLI surfaces also remain candidate unless separately promoted.
+**What happened?** Core loaded a multi-file YAML Mission Model, checked its declared semantics, and exercised a separate authored Scenario deterministically **on the host**. The result is contract evidence, not native flight execution.
 
-OrbitFabric is not a flight software framework, not a ground segment and not a spacecraft dynamics simulator.
+If you want the stable downstream integration input, additionally run:
 
-Generated runtime-facing contract bindings are not flight software.
+~~~bash
+orbitfabric export integration-input-set examples/demo-3u/mission/
+~~~
 
-Generated ground integration artifacts are not ground software.
+This emits one coherent set of Core-owned, machine-readable facts derived from a logical load/lint operation. Its exact format and consumer obligations are documented in the [Core Integration Input Contract](reference/core-integration-input-contract.md).
 
-Core-owned structured surfaces are not graph engines or Studio-specific APIs. Adapter Manager does not turn Core into an in-process plugin host or a provider-specific package manager.
+For Windows PowerShell setup, other commands, expected files and output paths, continue through the detailed workflows below.
 
----
+### Published product installation is a different path
+
+Core v1.4.0 also publishes a GitHub Release-based **no-clone** installation manifest for the Core wheel and external GitHub Release Source. You can then install an exact adapter version from the canonical Catalog. That workflow does **not** supply the demo files from this repository:
+
+~~~bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r https://github.com/OrbitFabric/orbitfabric/releases/download/v1.4.0/orbitfabric-install.txt
+orbitfabric adapter install fprime --version 0.1.3
+~~~
+
+See [Public Adapter Onboarding](reference/public-adapter-onboarding.md) for exact identities, release integrity, catalog provenance, and verification. The GitHub Release Source is **separately distributed**, while Core remains responsible for the installed adapter lifecycle. The adapter and related integration contracts remain candidate.
+
+## Detailed workflows and engineering references
+
+The remaining sections expand the same Core checkout into individual commands, deterministic structured exports, generated artifacts and adapter-management interfaces. They are **optional after the first run**.
 
 ## 1. Requirements
 
@@ -92,10 +114,10 @@ orbitfabric --help
 orbitfabric adapter --help
 ```
 
-Expected current package version:
+Expected package version at the v1.4.0 baseline:
 
 ```text
-orbitfabric 1.3.0
+orbitfabric 1.4.0
 ```
 
 ---
@@ -275,13 +297,13 @@ examples/demo-3u/generated/reports/coverage_summary.json
 
 `scenario_run_index.json` is emitted to the explicit `--json` path shown above.
 
-These v1.1.0 surfaces remain Core-owned candidate inspection surfaces after v1.3.0.
+These v1.1.0 surfaces remain Core-owned candidate inspection surfaces in Core v1.4.0.
 
 ---
 
 ## 14. Inspect the candidate Adapter Management CLI
 
-v1.3.0 adds a provider-neutral candidate Adapter Management surface to Core.
+Core v1.3.0 introduced a provider-neutral candidate Adapter Management foundation. Core v1.4.0 additionally composes exact GitHub Release Source acquisition at the CLI boundary; this remains a candidate product interface.
 
 Start by inspecting the available commands:
 
@@ -299,7 +321,7 @@ orbitfabric adapter catalog list <catalog.json>
 orbitfabric adapter catalog select <catalog.json> <SOURCE_COORDINATE> --version <EXACT_VERSION>
 ```
 
-Core does not fetch a remote Catalog or dispatch provider implementations. Provider-specific acquisition is handled by separate Release Source products, which hand a verified `ResolvedAdapterRelease` into the Core lifecycle.
+The `adapter catalog` commands shown above operate on local Catalog files. In Core v1.4.0, the **separate** `adapter install NAME --version EXACT` user-facing flow can acquire a commit-pinned canonical Catalog snapshot and compose the external GitHub Release Source for exact artifact acquisition. Provider-specific release download and verification remain in the separate provider product, outside the Core Adapter Manager; Core does not introduce universal provider dispatch.
 
 The exact desired/actual state split is:
 
@@ -445,7 +467,7 @@ The v1.1.0 simulation JSON structured expectation accounting remains additive an
 
 ## 21. What this proves
 
-The current repository baseline proves that OrbitFabric Core can:
+The current Core v1.4.0 implementation and the synthetic demo have **different evidence scopes**. The source workflows here demonstrate that Core can:
 
 - load a multi-file YAML Mission Model;
 - validate Mission Model structure;
@@ -462,6 +484,8 @@ The current repository baseline proves that OrbitFabric Core can:
 - validate generated C++17 bindings with a host-build smoke target;
 - generate ground-facing contract artifacts;
 - validate candidate operation-input integration contracts;
+- export a candidate mission-independent Core Interface Manifest and a candidate normalized Scenario Declaration;
+- check candidate generic Scenario Projection Accounting and Evidence Set contracts;
 - manage exact adapter desired/actual state through candidate provider-neutral Adapter Management contracts;
 - protect selected Core-owned structured surface fields with golden signatures.
 

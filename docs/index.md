@@ -1,282 +1,86 @@
-# OrbitFabric
-
-OrbitFabric is a model-first Mission Data Fabric for small spacecraft.
-
-Its central artifact is the Mission Data Contract: a structured Mission Model that defines mission data semantics once and lets OrbitFabric Core validate, exercise, document and export those semantics through explicit engineering boundaries.
-
-The Mission Model remains the semantic source of truth.
+# OrbitFabric Core documentation
 
-## What OrbitFabric covers
+**Start with a mission contract, then follow the same meaning into validation, evidence and integration.**
 
-The stable Mission Model includes documented contracts for:
+OrbitFabric Core is the semantic authority for a model-first Mission Data Fabric for small spacecraft. Its multi-file YAML Mission Model states mission data semantics once; Core validates and exports controlled representations so each downstream system does not invent its own interpretation.
 
-```text
-spacecraft and subsystems
-operational modes and transitions
-telemetry
-commands
-events
-faults
-packets and policies
-payloads
-data products, storage and retention intent
-contact and downlink assumptions
-commandability
-autonomy and recovery intent
-```
-
-Operational scenarios are separate host-side evidence inputs.
-
-From the validated Mission Model, Core can:
-
-- perform structural validation and semantic linting;
-- execute deterministic scenario evidence;
-- generate mission and data-flow documentation;
-- generate C++17 runtime-facing contract bindings;
-- generate generic ground-facing contract artifacts;
-- export machine-readable Core-owned inspection surfaces;
-- produce one coherent Integration Input Set for external ecosystem integrations;
-- manage exact installed external adapter releases through a provider-neutral candidate lifecycle.
-
-Generated runtime and ground artifacts are contract-facing outputs, not flight software or a ground segment.
-
-## Current Core version
-
-```text
-v1.3.0 - Adapter Management Foundation
-```
-
-The stable Mission Data Contract commitment started with v1.0.0.
-
-v1.2.0 extended the stable Core boundary with:
-
-```text
-mission_snapshot.json
-Core Integration Input Set
-seven additive stable-compatible FDIR Relationship Manifest families
-```
-
-v1.3.0 preserves those stable semantics and adds candidate operation-input and Adapter Management capabilities. It introduces no new Mission Model semantics.
-
-The coherent Integration Input Set is generated from one logical Core load/lint operation and includes:
-
-```text
-integration_input_manifest.json
-mission_snapshot.json
-entity_index.json
-relationship_manifest.json
-lint_report.json
-model_summary.json
-```
-
-External adapters must consume the documented Core boundary and must not reconstruct Mission Data Contract semantics by reparsing raw YAML as a fallback.
-
-## Stability at a glance
-
-### Stable v1.x Core surface
-
-```text
-Mission Model documented semantics
-Core structural validation
-Core semantic lint policy
-scenario YAML evidence inputs
-lint JSON report
-simulation JSON report
-model_summary.json
-entity_index.json
-relationship_manifest.json for admitted families
-mission_snapshot.json
-Core Integration Input Set
-documented stable CLI workflows
-compatibility and extensibility governance
-```
+This site is the **engineering documentation entry point**. For the short product introduction and first commands, see the [Core repository README](https://github.com/OrbitFabric/orbitfabric).
 
-### Candidate Core inspection surfaces
+## Choose your path
 
-The following v1.1 additions remain candidate:
+### First-time user: run a real Core workflow
 
-```text
-dashboard_summary.json
-scenario_run_index.json
-coverage_summary.json
-simulation JSON structured expectation accounting
-```
+1. [Quickstart](QUICKSTART.md): install the checked-out Core and get a first PASS from its synthetic demo.
+2. [Demo Walkthrough](DEMO_WALKTHROUGH.md): connect a payload command, data-product intent and host-side Scenario evidence.
+3. [Architecture](ARCHITECTURE.md): understand what Core owns and what native systems still own.
 
-### Candidate integration and Adapter Management surfaces
+These examples prove contract continuity and host-side execution only. They do not qualify flight software or demonstrate a live ground segment.
 
-The generic Integration Framework and v1.3 Adapter Management foundation include candidate contracts and product surfaces:
+### Mission engineer: define and validate the contract
 
-```text
-Projection Profile
-Integration Result
-Integration Package / Adapter Execution
-operation-input v1 contract lane
-Adapter Release Descriptor
-Adapter Project Lock
-Adapter Manager lifecycle
-explicit-source install-from-lock
-source-neutral resolved-release attachment
-Adapter Catalog model and CLI
-```
+The [Mission Model Stability Contract](reference/mission-model-stability-contract.md) explains compatibility rules for documented model semantics. Explore the specific [Payload Contract Model](reference/payload-contract-model.md), [Data Product and Storage Model](reference/data-product-contract-model.md), [Contact and Downlink Model](reference/contact-downlink-contract-model.md), and [Commandability and Autonomy Model](reference/commandability-contract-model.md).
 
-These remain independently versioned or explicitly classified candidate surfaces. They are not automatically part of the stable Mission Data Contract merely because the Core package version is 1.3.0.
+[Scenario Evidence Stability](reference/scenario-evidence-stability.md) describes separate Scenario inputs. [Lint Rule Code Stability](reference/lint-rule-code-stability.md) covers diagnostic compatibility.
 
-## Architecture in one view
+### Integrator: consume Core-owned boundaries
 
-```text
-Mission Model
-    -> OrbitFabric Core
-        -> validation and lint
-        -> scenario evidence
-        -> documentation
-        -> runtime-facing bindings
-        -> ground-facing artifacts
-        -> Core-owned structured surfaces
-        -> coherent Core Integration Input Set
-            -> Projection Profile
-            -> external Integration Package / Adapter
-            -> Integration Result
-            -> Studio / CI / other consumers
-```
+The supported stable external-integration input is the [coherent Core Integration Input Set](reference/core-integration-input-contract.md), including the Mission Snapshot, Entity Index, Relationship Manifest, Model Summary and lint report. Required incompatibilities must fail closed; downstream tools must not reinterpret Mission Model YAML as a fallback.
 
-Adapter lifecycle ownership is separate but connected:
+The [Core Interface Manifest](reference/core-interface-manifest.md) is a **candidate** mission-independent capability declaration for negotiating structured interfaces. Extension contracts such as [Projection Profile](reference/projection-profile-contract.md), [Integration Result](reference/integration-result-contract.md), [operation-input v1](reference/integration-contract-v1.md) and [Scenario Projection Accounting](reference/scenario-projection-accounting-contract.md) retain independent candidate status.
 
-```text
-Adapter Project Lock
-    -> exact Adapter Catalog selection
-    -> provider-specific Release Source outside Core
-    -> ResolvedAdapterRelease
-    -> Core Adapter Manager
-    -> Installed Adapter State
-```
+### Adapter user: install an exact external release
 
-Ownership remains explicit:
+[Public Adapter Onboarding](reference/public-adapter-onboarding.md) documents the published Core 1.4.0 + GitHub Release Source 0.1.0 route for exact Catalog-based installation without checking out the repositories.
 
-```text
-Core owns mission semantics.
-Core owns exact adapter identity, desired/actual state and lifecycle semantics.
-Projection Profiles own authored target-specific intent.
-External adapters own target-specific validation and generation.
-Provider-specific Release Sources own provider acquisition.
-Integration Results own explicit integration outputs and provenance.
-Downstream tools consume and present explicit records.
-```
+The [Adapter Manager](reference/adapter-manager-m0.md), [Project Lock](reference/adapter-project-lock-m1.md) and [Catalog CLI](reference/adapter-catalog-cli.md) retain explicit lifecycle/desired-state/selection boundaries. Provider-specific download logic is **outside** Core's manager.
 
-Core does not import ecosystem-specific adapter code in-process and does not contain provider-specific acquisition logic.
+### Contributor or reviewer: inspect the decisions
 
-## Start here
+[Project Charter](PROJECT_CHARTER.md), [Architecture](ARCHITECTURE.md), [Roadmap](ROADMAP.md), [Development Guide](DEVELOPMENT.md) and [Clean-Room Policy](CLEAN_ROOM_POLICY.md) cover engineering scope and development constraints.
 
-Choose the path that matches what you need.
+The [Stability and Compatibility Contract](reference/stability-compatibility-contract.md), [Release Compatibility Policy](reference/release-compatibility-policy.md) and [versioning reference](reference/versioning.md) define how to interpret published, candidate and stable surfaces. ADRs record *why* decisions were made; release notes preserve *when* they were published. Historical decisions must not be retroactively rewritten.
 
-### I want to run OrbitFabric
+## Core's ownership model at a glance
 
-Start with [Quickstart](QUICKSTART.md).
+~~~text
+Mission Model (semantic source of truth)
+       |
+       v
+OrbitFabric Core
+  load / validate / lint / normalize / generate / export
+       |                                  |
+       | separate Scenario inputs         | Core-owned structured exports
+       v                                  v
+host-side declared evidence       external consumers and adapters
+                                        |
+                                        v
+                                 native integration / runtime
+                                 (authority remains outside Core)
+~~~
 
-It covers environment setup, CLI validation, stable exports, candidate inspection surfaces, generators and demo scenarios.
+This is a map of responsibilities, **not** an obligatory sequential workflow.
 
-### I want to understand the project
+The Mission Model remains the semantic source of truth; operational Scenarios are independent evidence inputs; generated artifacts and structured exports are derived. Integration adapters own target-specific projections. Native systems remain authoritative for implementation and observation. Studio presents Core-owned facts without redefining them.
 
-Read [Project Charter](PROJECT_CHARTER.md) and [Architecture](ARCHITECTURE.md).
+## Publication and maturity
 
-The Charter defines the problem, target users, scope and positioning. Architecture defines semantic ownership, stable boundaries, integration ownership and explicit non-goals.
+**Latest published Core product:** [v1.4.0, 25 September 2026](releases/v1.4.0.md).
 
-### I want an end-to-end example
+- **Stable v1.x:** documented Mission Model semantics and selected Core-owned reports/exports, including the v1.2 Mission Snapshot and coherent Integration Input Set.
+- **Candidate:** Core Interface Manifest, Scenario Declaration, inspection/coverage surfaces, adapter lifecycle and separately versioned extension/evidence contracts.
+- **Generated preview:** C++17 runtime contract bindings, generic ground artifacts and generated Markdown.
 
-Use [Demo Walkthrough](DEMO_WALKTHROUGH.md).
+A published `1.4.0` package is not a blanket stability promise for every interface. Some stable Core outputs retain previously assigned `0.1-candidate` format identifiers: wire identifiers and compatibility classification are different engineering decisions. Refer to the [authoritative classification](reference/stability-compatibility-contract.md), not this short summary, for consumer obligations.
 
-The built-in `demo-3u` mission demonstrates a synthetic Mission Data Chain from payload command through data product, storage intent, downlink intent, contact assumptions, scenario evidence, generated artifacts and Core-owned surfaces.
+## Practical boundaries
 
-### I want compatibility rules
+Core does not implement onboard scheduling, live command uplink, ground archives, spacecraft dynamics, CCSDS/PUS/CFDP stacks, flight qualification or adapter-specific runtime behavior. It does not load arbitrary target adapter logic into its own process.
 
-Read these references:
+The synthetic demo, reference integration contracts and published adapter onboarding demonstrate **different evidence scopes**. A successful host-side Scenario is not evidence of native target execution.
 
-- [Mission Model Stability Contract](reference/mission-model-stability-contract.md)
-- [Stability and Compatibility Contract](reference/stability-compatibility-contract.md)
-- [Release Compatibility Policy](reference/release-compatibility-policy.md)
-- [CLI Contract v1](reference/cli-contract-v1.md)
-- [JSON Report Compatibility](reference/json-report-compatibility.md)
-- [Generated Surfaces Stability](reference/generated-surfaces-stability.md)
-- [Golden Output and Regression Confidence Policy](reference/golden-output-regression-confidence.md)
+## Further reading
 
-### I want the external integration boundary
-
-Read:
-
-- [Mission Snapshot Surface](reference/mission-snapshot-surface.md)
-- [Core Integration Input Contract](reference/core-integration-input-contract.md)
-- [v1.2 Integration Input Stability Decision](reference/v1.2-integration-input-stability-decision.md)
-- [Projection Profile Contract](reference/projection-profile-contract.md)
-- [Projection Profile Integration Schema Publication](reference/projection-profile-schema-publication.md)
-- [Integration Package and Adapter Execution Contract](reference/integration-package-adapter-execution-contract.md)
-- [Integration Operation-Input Contract v1](reference/integration-contract-v1.md)
-- [Integration Result Contract](reference/integration-result-contract.md)
-- [Scenario Projection Accounting Contract](reference/scenario-projection-accounting-contract.md)
-- [ADR-0022 Result-Owned Scenario Projection Accounting](adr/ADR-0022-scenario-projection-accounting.md)
-
-The Core input boundary is stable from v1.2. The Profile, Package, operation-input and Result contracts remain candidate extension contracts.
-
-### I want the Adapter Management boundary
-
-Read:
-
-- [Adapter Manager M0](reference/adapter-manager-m0.md)
-- [Adapter Project Lock M1](reference/adapter-project-lock-m1.md)
-- [Explicit-Source Install from Adapter Project Lock](reference/adapter-install-from-lock-explicit-source.md)
-- [Adapter Catalog CLI](reference/adapter-catalog-cli.md)
-- [ADR-0020 Source-Neutral Release Attachment Seam](adr/ADR-0020-source-neutral-release-attachment-seam.md)
-- [ADR-0021 Adapter Catalog Exact Selection Boundary](adr/ADR-0021-adapter-catalog-exact-selection-boundary.md)
-
-The Core boundary is provider-neutral. Provider-specific Release Sources remain external products and hand verified exact releases into Core through `ResolvedAdapterRelease`.
-
-### I want to contribute
-
-Read the repository [Contributing Guide](https://github.com/OrbitFabric/orbitfabric/blob/main/CONTRIBUTING.md) and [Clean-Room Policy](CLEAN_ROOM_POLICY.md).
-
-## Project boundaries
-
-OrbitFabric is not:
-
-```text
-a flight software framework
-a ground segment
-a mission control system
-a command uplink service
-a telemetry archive
-a spacecraft dynamics simulator
-a hardware abstraction layer
-a CCSDS/PUS/CFDP implementation
-a relationship or dependency graph engine
-a Core in-process plugin execution platform
-a provider-specific package registry client
-a Studio-specific backend
-```
-
-Those boundaries are deliberate. OrbitFabric is valuable because it provides a narrow, explicit contract and lifecycle layer that other engineering systems can consume.
-
-## Quality and reproducibility
-
-The main repository gates are:
-
-```bash
-ruff check .
-pytest
-mkdocs build --strict
-```
-
-CI validates Python 3.11 and Python 3.12 and regenerates representative mission evidence.
-
-Selected stable fields are protected by golden signatures. Golden tests protect contract meaning rather than freezing every byte of generated output.
-
-## Clean-room policy
-
-OrbitFabric is independent open-source work.
-
-Public examples must be synthetic or based only on material that can legally be used and redistributed. Proprietary mission data, private packet formats, employer-owned code, customer-owned details, operational logs, export-controlled material and NDA-protected information are prohibited.
-
-See [Clean-Room Policy](CLEAN_ROOM_POLICY.md).
-
-## Release notes
-
-The current release notes are in [v1.3.0 Adapter Management Foundation](releases/v1.3.0.md).
-
-The complete release history is available under the **Releases** section of this documentation site and in the repository `CHANGELOG.md`.
+- [v1.4.0 release notes](releases/v1.4.0.md) and [Changelog](https://github.com/OrbitFabric/orbitfabric/blob/main/CHANGELOG.md)
+- [CLI Contract v1](reference/cli-contract-v1.md) and [JSON Report Compatibility](reference/json-report-compatibility.md)
+- [Generated Surfaces Stability](reference/generated-surfaces-stability.md) and [Evidence Set Manifest](reference/evidence-set-manifest-contract.md)
+- [OrbitFabric repository and contribution guide](https://github.com/OrbitFabric/orbitfabric)
