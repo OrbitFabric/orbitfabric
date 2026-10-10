@@ -1,6 +1,6 @@
 # Post-v1 Integration Surface Classification
 
-Status: Active compatibility inventory through v1.3.0  
+Status: Active compatibility inventory through published Core v1.4.0  
 Scope: Core-owned structured and integration lifecycle surfaces introduced after `v1.0.0 - Stable Mission Data Contract`
 
 This page preserves the classification history of post-v1 Core-owned surfaces, records the v1.2 promotion decision and classifies the candidate Adapter Management foundation added in v1.3.0.
@@ -23,7 +23,7 @@ These remain stable. The Mission Model remains the source of truth.
 
 ## 2. v1.1.0 candidate surfaces
 
-The following were consolidated as candidate Core-owned surfaces in v1.1.0 and remain candidate after v1.3.0:
+The following were consolidated as candidate Core-owned surfaces in v1.1.0 and remain candidate in v1.4.0:
 
 ```text
 dashboard_summary.json
@@ -109,9 +109,19 @@ The first provider-specific implementation does not define a universal provider 
 
 ---
 
+## 4a. Core v1.4.0 additions
+
+Published Core v1.4.0 adds an exact GitHub onboarding route and four independently classified candidate surfaces: Core Interface Manifest, Scenario Declaration Surface, Scenario Projection Accounting and Evidence Set Manifest. All retain their documented `0.1-candidate` contract identities.
+
+The Core Interface Manifest declares capability identities. Scenario Declaration contains authored Scenario atoms, not execution observations. Optional Result-owned accounting holds adapter declarations. Evidence Set Manifest holds curated references and byte integrity without redefining producer meaning.
+
+Core's exact adapter installation CLI composes Catalog selection and the separately distributed GitHub Release Source. The Core Adapter Manager still owns the provider-neutral lifecycle. Project Lock is optional for this user-facing workflow. Product release publication does not establish native adapter execution evidence.
+
+---
+
 ## 5. Current classification inventory
 
-| Surface | Classification after v1.3.0 | Purpose |
+| Surface | Classification in v1.4.0 | Purpose |
 |---|---|---|
 | `model_summary.json` | Stable | Domain/count summary |
 | `entity_index.json` | Stable | Canonical entity inventory |
@@ -130,6 +140,11 @@ The first provider-specific implementation does not define a universal provider 
 | `ResolvedAdapterRelease` handoff | Candidate Core seam | Source-neutral exact resolved-release attachment |
 | Adapter Catalog | Candidate | Provider-neutral exact release availability and source binding references |
 | Adapter Catalog CLI | Candidate | Local validation/list/exact selection |
+| Exact GitHub onboarding CLI composition | Candidate | Catalog selection and external provider handoff |
+| Core Interface Manifest | Candidate | Available capability declaration and fingerprint |
+| Scenario Declaration Surface | Candidate | Authored Scenario atom inventory and source digest |
+| Scenario Projection Accounting | Candidate generic extension | Optional adapter-declared atom dispositions |
+| Evidence Set Manifest | Candidate generic contract | Retained evidence integrity and correlation |
 
 ---
 
@@ -151,7 +166,7 @@ These are not stable Core Mission Data Contract surfaces and do not move target-
 
 ## 7. Compatibility posture
 
-The v1.3 release does not change Mission Model semantics.
+Neither v1.3.0 nor v1.4.0 changes stable Mission Model semantics.
 
 Compatible Mission Data Contract consumers must:
 
@@ -220,6 +235,7 @@ v1.0.0  stable narrow Mission Data Contract
 v1.1.0  candidate inspection additions
 v1.2.0  stable Mission Snapshot + Core Integration Input boundary
 v1.3.0  candidate provider-neutral Adapter Management foundation
+v1.4.0  published exact GitHub onboarding and additional candidate contracts
 ```
 
 A stable Core package release does not automatically promote candidate product surfaces. Every promotion remains an explicit architectural and compatibility decision.
