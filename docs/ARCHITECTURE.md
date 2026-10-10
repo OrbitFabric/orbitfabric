@@ -1,6 +1,6 @@
 # OrbitFabric - Architecture
 
-Version: 1.3.0 Adapter Management Foundation  
+Version: 1.4.0 Core Interface and Public Adapter Onboarding  
 Status: Stable Mission Data Contract with stable Core integration input boundary and candidate Adapter Management lifecycle  
 Scope: Mission Data Contract architecture, Core-owned structured surfaces, external integration boundary, Adapter Management and extensibility governance
 
@@ -21,10 +21,10 @@ OrbitFabric validates that model, executes deterministic host-side scenario evid
 The current release is:
 
 ```text
-v1.3.0 - Adapter Management Foundation
+v1.4.0 - Core Interface and Public Adapter Onboarding
 ```
 
-v1.3.0 introduces no new Mission Model semantics. It preserves the stable v1.2 Core integration input boundary and adds a candidate provider-neutral lifecycle for exact external adapter releases.
+v1.4.0 retains the stable v1.2 Core integration input boundary and the candidate v1.3 Adapter Management foundation. It adds a supported, exact GitHub Release-based adapter installation route through the Core CLI and new candidate structured declarations/evidence contracts. None of these changes modify Mission Model semantics or make the candidate contracts stable.
 
 ---
 
@@ -137,7 +137,7 @@ Relationship Manifest manifest_version  = 0.1-candidate
 
 Changing those identifiers solely to remove the word `candidate` would create needless consumer incompatibility.
 
-The same principle applies to new v1.3 candidate Adapter Management contracts: package release version and contract maturity are separate concepts.
+The same principle applies to v1.3 and v1.4 candidate Adapter Management, Core Interface, Scenario Declaration, accounting and evidence-set contracts: package release version and contract maturity are separate concepts.
 
 ### 3.6 Generated Artifacts Are Disposable Unless Classified Otherwise
 
@@ -212,7 +212,7 @@ Adapter Manager may execute an installed external adapter through the documented
 
 ## 5. Adapter Management Ownership Model
 
-The v1.3 candidate lifecycle is:
+The candidate lifecycle, established in v1.3 and composed with a GitHub onboarding route in v1.4, is:
 
 ```text
 Adapter Project Lock
@@ -257,6 +257,8 @@ mutable provider locators as lock identity
 
 The first backend is `python-wheel-managed-env`. Backend-specific materialization is internal to the lifecycle implementation and does not change Project Lock identity semantics.
 
+Core v1.4.0 adds a user-facing `orbitfabric adapter install NAME --version EXACT` composition. It acquires a canonical Catalog snapshot at an exact commit (or uses an explicitly selected local snapshot), selects one exact release, invokes the separately distributed `GitHubReleaseSource` and hands the verified resolved release to Core's existing installation manager. Provider fetch/verification remains owned by that external product. The Core CLI composition is not a general provider registry or provider-neutral transport framework.
+
 A `MATCH` lock entry is idempotent and requires no remote resolution. A mismatching installed release is not automatically destroyed.
 
 ---
@@ -284,7 +286,7 @@ The seven FDIR relationship families added after v1.1 are admitted additive stab
 
 ### Candidate Core-owned inspection surfaces
 
-These remain candidate after v1.3:
+These remain candidate in v1.4.0:
 
 ```text
 dashboard_summary.json
@@ -314,7 +316,7 @@ Integration Result 0.2-candidate
 
 ### Candidate Adapter Management surfaces
 
-v1.3 adds:
+The candidate Adapter Management foundation, originally added in v1.3 and retained in v1.4, includes:
 
 ```text
 Adapter Manager lifecycle
@@ -326,7 +328,9 @@ Adapter Catalog 0.1-candidate
 Adapter Catalog CLI
 ```
 
-Their inclusion in Core 1.3.0 does not promote them into the stable Mission Data Contract.
+Core v1.4.0 also introduces the candidate `orbitfabric.core_interface` capability manifest and `orbitfabric.scenario_declaration` authored Scenario normalization surface, plus generic candidate Scenario Projection Accounting and Evidence Set Manifest contracts. Core owns the generic schemas and conformance checks. Adapters own their projection dispositions; evidence curators and producers retain responsibility for retained evidence content and its native meaning.
+
+Neither the original Adapter Management interfaces nor the new v1.4 candidate surfaces are promoted to stable Mission Data Contract commitments by their inclusion in a published Core release.
 
 ---
 
@@ -340,7 +344,8 @@ OrbitFabric
 │   ├── payload / data-product / storage contracts
 │   ├── contact / downlink contracts
 │   ├── commandability / autonomy contracts
-│   └── scenario evidence contracts
+│
+├── Operational Scenarios (separate authored evidence inputs)
 │
 ├── Core Toolchain
 │   ├── load / validate / lint
@@ -349,7 +354,9 @@ OrbitFabric
 │   ├── export model-summary / entity-index / relationship-manifest
 │   ├── export mission-snapshot
 │   ├── export integration-input-set
-│   └── export candidate dashboard/scenario/coverage surfaces
+│   ├── export candidate dashboard/scenario/coverage surfaces
+│   ├── export candidate core-interface / scenario-declaration
+│   └── validate candidate accounting / evidence-set contracts
 │
 ├── Stable Integration Input Boundary
 │   └── integration_input_manifest.json + coherent Core surfaces
@@ -359,12 +366,13 @@ OrbitFabric
 │   ├── Adapter Catalog exact selection
 │   ├── ResolvedAdapterRelease handoff
 │   ├── Adapter Manager lifecycle
-│   └── Installed Adapter State
+│   ├── Installed Adapter State
+│   └── v1.4 CLI composition for exact GitHub onboarding
 │
 └── External Integration Layer
     ├── Projection Profile
     ├── Integration Package / Adapter
-    ├── provider-specific Release Source
+    ├── provider-specific Release Source (separate product)
     ├── target-native artifacts
     └── Integration Result
 ```
@@ -399,7 +407,7 @@ The original Relationship Manifest golden remains fixed so additive relationship
 
 Integration Input Set tests protect coherence, exact surface digests, deterministic fingerprinting, failure states and manifest-last publication semantics.
 
-v1.3 Adapter Management regression coverage protects:
+v1.3 and v1.4 Adapter Management regression coverage protects:
 
 ```text
 Release Descriptor conformance
@@ -410,6 +418,9 @@ managed Python backend materialization
 source-neutral resolved-release handoff
 Catalog exact selection and ambiguity rejection
 Catalog CLI fail-closed behavior
+exact GitHub onboarding selection and provenance
+Core Interface and Scenario Declaration candidate exports
+Scenario Projection Accounting and Evidence Set conformance
 ```
 
 Cross-repository acceptance additionally proves a real public adapter release through Catalog selection, provider resolution, Core install, verification, acquisition cleanup and repeat `NOOP`.
@@ -418,7 +429,7 @@ Cross-repository acceptance additionally proves a real public adapter release th
 
 ## 10. Explicit Non-Goals
 
-The v1.3 architecture does not introduce:
+The v1.4 architecture does not introduce:
 
 ```text
 flight runtime behavior
@@ -430,13 +441,25 @@ Core in-process adapter execution
 Core plugin discovery/loading/execution
 provider-specific acquisition inside Core
 provider registration/dispatch protocol
-remote Catalog default/fetch policy
+generic remote Catalog provider registry or dispatch policy
 latest/stable/range version solving
 automatic adapter upgrades
 Studio-specific API
 OpenOBSW/OpenSVF/YAMCS/F Prime-specific Core semantics
 formal verification engine
 ```
+
+---
+
+## Reference boundaries
+
+- [Core v1.4.0 release notes](releases/v1.4.0.md)
+- [Public Adapter Onboarding](reference/public-adapter-onboarding.md)
+- [Core Interface Manifest](reference/core-interface-manifest.md)
+- [Scenario Declaration Surface](reference/scenario-declaration-surface.md)
+- [Scenario Projection Accounting Contract](reference/scenario-projection-accounting-contract.md)
+- [Evidence Set Manifest Contract](reference/evidence-set-manifest-contract.md)
+- [Stability and Compatibility Contract](reference/stability-compatibility-contract.md)
 
 ---
 

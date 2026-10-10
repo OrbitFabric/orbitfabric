@@ -1,6 +1,6 @@
 # OrbitFabric - Project Charter
 
-Version: 1.3.0 Adapter Management Foundation  
+Version: 1.4.0 Core Interface and Public Adapter Onboarding  
 Status: Stable Mission Data Contract with stable Core integration input boundary and candidate Adapter Management foundation  
 Scope: Mission Data Contract foundation, Core-owned stable/candidate surfaces, external integration boundary, adapter lifecycle, extensibility and compatibility governance
 
@@ -14,7 +14,7 @@ Its purpose is to let small spacecraft teams define mission data once, in a stru
 
 OrbitFabric is not intended to be another flight software framework, another CubeSat tutorial, another ground segment tool, a payload runtime framework, an in-process plugin platform, a provider-specific package manager or a visual modeling backend.
 
-It is the contract layer between mission design, onboard software, simulation, testing, documentation, runtime-facing integration, ground integration, external ecosystem integrations and downstream inspection tools. From v1.3.0 it also owns a candidate provider-neutral lifecycle boundary for exact external adapter releases.
+It is the contract layer between mission design, onboard software, simulation, testing, documentation, runtime-facing integration, ground integration, external ecosystem integrations and downstream inspection tools. Since v1.3.0 it also owns a candidate provider-neutral lifecycle boundary for exact external adapter releases. Core v1.4.0 adds one explicit application-level GitHub onboarding route by composing an external Release Source with this lifecycle, without introducing a general provider registry.
 
 The guiding principle is:
 
@@ -24,10 +24,10 @@ The guiding principle is:
 
 ## 2. Current Status
 
-OrbitFabric is currently released at:
+OrbitFabric Core's current published release is:
 
 ```text
-v1.3.0 - Adapter Management Foundation
+v1.4.0 - Core Interface and Public Adapter Onboarding
 ```
 
 The stable Mission Data Contract commitment originated with `v1.0.0 - Stable Mission Data Contract`.
@@ -52,7 +52,9 @@ source-neutral ResolvedAdapterRelease attachment
 Adapter Catalog 0.1-candidate and exact-selection CLI
 ```
 
-No Mission Model semantics are added, removed, renamed or redefined by v1.3.0.
+v1.4.0 adds exact-version public GitHub adapter onboarding using the separately published GitHub Release Source 0.1.0 and a canonical, commit-pinned Catalog snapshot. The `orbitfabric adapter install NAME --version EXACT` command composes provider-specific acquisition outside Core's lifecycle manager and Core-owned installation/verification. The release also includes the candidate Core Interface Manifest, Scenario Declaration Surface, Scenario Projection Accounting contract and Evidence Set Manifest contract.
+
+Neither the v1.3.0 nor the v1.4.0 changes redefine Mission Model semantics or promote candidate contracts into stable commitments.
 
 The v1.1.0 dashboard summary, scenario run index, coverage summary and structured expectation additions remain candidate.
 
@@ -89,7 +91,7 @@ A Mission Data Contract describes, in a structured and machine-readable way:
 - stability and compatibility classifications;
 - extensibility boundary rules.
 
-The Mission Model is the semantic source of truth for all derived Core artifacts.
+The Mission Model is the semantic source of truth for all derived Core artifacts. Operational Scenarios are separate authored host-side evidence inputs; they must not be mistaken for Mission Model content. Likewise, generated artifacts and integration contract surfaces are outputs and interfaces, not additional Mission Model semantics.
 
 Adapter Management is not a second semantic model. It tracks exact Integration Package release identity, project-scoped desired state, user-scoped installed state and lifecycle verification.
 
@@ -107,7 +109,7 @@ A command may be accepted by a simulator but rejected onboard. A telemetry field
 
 External integrations create a second class of reproducibility problem: a project can know which adapter it needs but lose the exact release/artifact identity, conflate provider URLs with semantic identity, or rely on mutable local installation state without a portable desired-state declaration.
 
-OrbitFabric addresses the first problem through an explicit, validated, reusable Mission Data Contract. The v1.3 candidate Adapter Management foundation addresses the second through exact release identity, Project Lock desired state, Installed Adapter State, provider-neutral Catalog selection and a source-neutral release handoff.
+OrbitFabric addresses the first problem through an explicit, validated, reusable Mission Data Contract. The candidate Adapter Management foundation introduced in v1.3 addresses the second through exact release identity, Project Lock desired state, Installed Adapter State, provider-neutral Catalog selection and a source-neutral release handoff. The v1.4 application-level onboarding path adds exact GitHub acquisition composition without moving provider-specific transport into the Core Adapter Manager.
 
 ---
 
@@ -211,7 +213,7 @@ After v1.0.0, any change to a selected stable surface must include explicit comp
 
 A surface does not become stable merely because it exists. v1.2.0 was an explicit reviewed promotion of the Mission Snapshot and coherent Integration Input Set responsibilities.
 
-Likewise, inclusion of Adapter Management in Core v1.3.0 does not automatically promote its candidate contracts into the stable Mission Data Contract.
+Likewise, inclusion of Adapter Management in Core v1.3.0 and candidate declarations or onboarding in Core v1.4.0 does not automatically promote their contracts into the stable Mission Data Contract.
 
 Additive relationship types must remain explicitly documented compatibility additions and must not be silently treated as a permanently closed enumeration.
 
@@ -274,7 +276,7 @@ The Mission Snapshot and Integration Input Set retain their already reference-pr
 
 ## 9. Candidate Core Inspection, Integration and Adapter Management Surfaces
 
-The following Core-owned inspection surfaces remain candidate after v1.3.0:
+The following Core-owned inspection surfaces remain candidate in v1.4.0:
 
 ```text
 dashboard_summary.json
@@ -292,7 +294,7 @@ Integration Package / Adapter Execution
 operation-input v1 lane
 ```
 
-The v1.3 Adapter Management candidate surfaces include:
+The v1.3 Adapter Management candidate foundation, carried into v1.4.0, includes:
 
 ```text
 Adapter Manager lifecycle
@@ -302,6 +304,16 @@ explicit-source install-from-lock
 source-neutral ResolvedAdapterRelease attachment
 Adapter Catalog 0.1-candidate
 Adapter Catalog CLI
+exact GitHub install command composition in v1.4.0
+```
+
+Further candidate interfaces added in v1.4.0 are:
+
+```text
+Core Interface Manifest 0.1-candidate
+Scenario Declaration Surface 0.1-candidate
+Scenario Projection Accounting 0.1-candidate
+Evidence Set Manifest 0.1-candidate
 ```
 
 These define reviewed boundaries but do not become stable Mission Data Contract semantics merely because they ship in the Core package.
@@ -350,7 +362,7 @@ Adapter Project Lock
 
 Core must remain provider-neutral.
 
-The current absence of a one-command provider-neutral install-from-Catalog UX is deliberate. A universal provider registration/dispatch abstraction must not be invented from only one provider implementation.
+Core v1.4.0 provides the explicit `orbitfabric adapter install NAME --version EXACT` route using the separately distributed GitHub Release Source. It is one supported GitHub application-composition path, not generic provider registration/dispatch. No universal provider registry, version-range solving or automatic upgrade policy is implied.
 
 ---
 
@@ -399,31 +411,37 @@ Golden signatures do not freeze complete generated JSON files, absolute paths, c
 
 ## 14. Demo and Integration Evidence Chain
 
-The stable demo evidence chain includes:
+The synthetic Scenario exercises a contract-level path independently from generated outputs:
 
 ```text
 payload.start_acquisition
-        -> payload.acquisition_started
-        -> payload.radiation_histogram data product evidence
-        -> storage intent declared
-        -> downlink intent declared
-        -> science_next_available_contact downlink flow
-        -> demo_contact_001 contact window
-        -> scenario JSON evidence
-        -> runtime-facing contract bindings
-        -> ground-facing dictionaries
-        -> model_summary.json
-        -> entity_index.json
-        -> relationship_manifest.json
-        -> mission_snapshot.json
-        -> selected stable-surface golden signatures
+        -> expected command acceptance and event
+        -> payload.radiation_histogram declared data-product intent
+        -> declared storage and downlink intent
+        -> science_next_available_contact eligible flow
+        -> demo_contact_001 contact assumption
+        -> host-side Scenario report and expectation evidence
 ```
+
+From the validated Mission Model, Core also independently derives structured exports, runtime-facing bindings, ground-facing artifacts and documentation. They are not downstream execution stages of the Scenario run. Golden signatures protect selected contract-significant fields of stable Core-owned surfaces, not evidence of flight or ground execution.
 
 The generic integration evidence additionally demonstrates real external Integration Packages consuming the coherent Core Integration Input Set without raw-YAML semantic reconstruction.
 
-The v1.3 Adapter Management evidence demonstrates a real public adapter release moving through exact Catalog selection, provider-specific resolution, Project Lock install, verification, acquisition cleanup and idempotent `MATCH -> NOOP` behavior.
+Separate Adapter Management acceptance exercises exact Catalog selection, provider-specific resolution, Project Lock installation, verification, acquisition cleanup and idempotent `MATCH -> NOOP` behavior. The published v1.4.0 GitHub no-clone onboarding path is distinct from the synthetic Mission Model demonstration; publication itself is not proof of native adapter execution.
 
 These prove architectural contract continuity and lifecycle reproducibility, not flight readiness, ground readiness, downstream protocol compliance or operational completeness.
+
+---
+
+## Reference boundaries
+
+- [Core v1.4.0 release notes](releases/v1.4.0.md)
+- [Public Adapter Onboarding](reference/public-adapter-onboarding.md)
+- [Core Interface Manifest](reference/core-interface-manifest.md)
+- [Scenario Declaration Surface](reference/scenario-declaration-surface.md)
+- [Scenario Projection Accounting Contract](reference/scenario-projection-accounting-contract.md)
+- [Evidence Set Manifest Contract](reference/evidence-set-manifest-contract.md)
+- [Stability and Compatibility Contract](reference/stability-compatibility-contract.md)
 
 ---
 
