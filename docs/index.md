@@ -80,6 +80,8 @@ The synthetic demo, reference integration contracts and published adapter onboar
 
 ## Further reading
 
+For the complete reference collection organized by topic, use the [Core Reference Guide](reference/index.md). It indexes the existing reference pages without changing their paths or compatibility commitments.
+
 - [v1.4.0 release notes](releases/v1.4.0.md) and [Changelog](https://github.com/OrbitFabric/orbitfabric/blob/main/CHANGELOG.md)
 - [CLI Contract v1](reference/cli-contract-v1.md) and [JSON Report Compatibility](reference/json-report-compatibility.md)
 - [Generated Surfaces Stability](reference/generated-surfaces-stability.md) and [Evidence Set Manifest](reference/evidence-set-manifest-contract.md)
