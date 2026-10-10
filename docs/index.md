@@ -80,6 +80,8 @@ The synthetic demo, reference integration contracts and published adapter onboar
 
 ## Further reading
 
+For the published release and prior release history, see the [Core Release Guide](releases/index.md). Earlier notes remain available but are not the current product instructions.
+
 For the complete reference collection organized by topic, use the [Core Reference Guide](reference/index.md). It indexes the existing reference pages without changing their paths or compatibility commitments.
 
 - [v1.4.0 release notes](releases/v1.4.0.md) and [Changelog](https://github.com/OrbitFabric/orbitfabric/blob/main/CHANGELOG.md)
