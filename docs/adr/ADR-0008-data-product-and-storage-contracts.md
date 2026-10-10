@@ -1,4 +1,4 @@
-# ADR-0008 — Data Product and Storage Contracts
+# ADR-0008 - Data Product and Storage Contracts
 
 Status: Accepted  
 Date: 2026-05-01

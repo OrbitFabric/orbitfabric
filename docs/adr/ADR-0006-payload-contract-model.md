@@ -1,4 +1,4 @@
-# ADR-0006 — Payload / IOD Payload Contract Model
+# ADR-0006 - Payload / IOD Payload Contract Model
 
 Status: Accepted  
 Date: 2026-05-01

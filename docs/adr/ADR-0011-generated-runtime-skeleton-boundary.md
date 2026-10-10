@@ -1,4 +1,4 @@
-# ADR-0011 — Generated Runtime Skeleton Boundary
+# ADR-0011 - Generated Runtime Skeleton Boundary
 
 Status: Accepted for v0.7.0  
 Date: 2026-05-09

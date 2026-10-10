@@ -4,7 +4,7 @@ Describe the purpose of this pull request.
 
 State the milestone or project area when relevant, for example:
 
-`v0.7 — Generated Runtime Skeletons`
+`v0.7 - Generated Runtime Skeletons`
 
 ## Changes
 
@@ -106,6 +106,10 @@ If some checks were not run, explain why.
 - [ ] This PR intentionally updates generated artifacts.
 
 If generated artifacts are committed, explain why.
+
+## Documentation style check
+
+- [ ] Public-facing text uses plain ASCII hyphens and excludes internal process labels.
 
 ## Notes for Review
 

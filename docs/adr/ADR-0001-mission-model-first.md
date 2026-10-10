@@ -1,4 +1,4 @@
-# ADR-0001 — Mission Model First
+# ADR-0001 - Mission Model First
 
 Status: Accepted  
 Date: 2026-04-29  
@@ -116,7 +116,7 @@ OrbitFabric may still include simulation, but simulation validates behavior desc
 
 ## Alternatives Considered
 
-### Alternative 1 — Runtime First
+### Alternative 1 - Runtime First
 
 Start by implementing an onboard runtime with telemetry registry, command router, event bus, mode manager and fault monitor.
 
@@ -124,7 +124,7 @@ Rejected.
 
 This would make OrbitFabric look like a small flight software framework. It would also force runtime design decisions before the Mission Model is stable.
 
-### Alternative 2 — Simulator First
+### Alternative 2 - Simulator First
 
 Start by implementing the scenario runner and mock subsystems.
 
@@ -132,7 +132,7 @@ Rejected.
 
 Simulation is important, but it is not the source of truth. The simulator must execute behavior derived from the Mission Model.
 
-### Alternative 3 — Packet Format First
+### Alternative 3 - Packet Format First
 
 Start by defining binary packets, JSON packets or CCSDS-like structures.
 
@@ -140,7 +140,7 @@ Rejected.
 
 Packet formats are downstream representations. Starting from packets would overemphasize encoding and underemphasize mission consistency.
 
-### Alternative 4 — Ground Export First
+### Alternative 4 - Ground Export First
 
 Start by generating Yamcs/OpenC3/XTCE-like artifacts.
 
@@ -148,7 +148,7 @@ Rejected.
 
 Ground integration is valuable but premature. OrbitFabric must first prove that its own Mission Model is coherent.
 
-### Alternative 5 — Documentation Generator First
+### Alternative 5 - Documentation Generator First
 
 Start by generating Markdown documentation from YAML.
 

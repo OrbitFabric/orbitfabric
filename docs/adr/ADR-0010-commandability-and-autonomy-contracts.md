@@ -1,4 +1,4 @@
-# ADR-0010 — Commandability and Autonomy Contracts
+# ADR-0010 - Commandability and Autonomy Contracts
 
 Status: Accepted / Implemented  
 Date: 2026-05-07
