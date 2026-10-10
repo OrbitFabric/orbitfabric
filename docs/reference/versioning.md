@@ -201,14 +201,15 @@ Integration Package / Adapter Execution v0 lane
 Integration Result 0.1-candidate
 ```
 
-v1.3.0 also includes the candidate operation-input execution lane:
+v1.3.0 includes the candidate operation-input execution lane:
 
 ```text
 Integration Package Manifest 0.2-candidate
 orbitfabric.adapter_cli.v1
 Integration Result 0.2-candidate
-Scenario Projection Accounting 0.1-candidate
 ```
+
+Core v1.4.0 additionally introduces the optional, independently versioned Scenario Projection Accounting 0.1-candidate artifact within a Result 0.2-candidate.
 
 The Projection Profile remains independently versioned and target-specific intent remains extension-owned.
 
