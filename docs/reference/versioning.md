@@ -9,6 +9,9 @@ OrbitFabric distinguishes between:
 - generated JSON report producer versions;
 - Core-owned structured-surface format versions;
 - the Core Integration Input Set version;
+- the mission-independent Core Interface Manifest identity;
+- the Scenario Declaration Surface version and exact source fingerprint;
+- generic accounting and retained evidence contract versions;
 - extension-owned Projection Profile / Integration Result / Integration Package contract versions;
 - Adapter Management contract format versions;
 - an adapter's own exact release version;
@@ -39,8 +42,10 @@ orbitfabric --version
 Current release:
 
 ```text
-orbitfabric 1.3.0
+orbitfabric 1.4.0
 ```
+
+This is the published v1.4.0 baseline. A later checkout may report a newer package version.
 
 This version answers:
 
@@ -60,9 +65,34 @@ The mission-independent Core Interface Manifest is available through:
 orbitfabric export core-interface --json core_interface.json
 ```
 
-It reports the package version as provenance and separately reports `interface_sha256`, derived from the canonical declared capability set. The fingerprint excludes the product version and environment/repository facts. Consumers must compare required capability ids and contract kinds/versions; fingerprint comparison does not replace that negotiation.
+The candidate manifest has `kind = orbitfabric.core_interface` and `interface_version = 0.1-candidate`. It reports the package version as provenance and separately reports `interface_sha256` over the canonical capability declaration. This fingerprint excludes the package version and environment/repository information. Consumers compare required capability ids and contract kinds/versions. The manifest does not turn each declared capability into a stable contract.
 
 ---
+
+## Scenario Declaration identity
+
+The independently versioned Core-owned candidate declaration reports:
+
+```text
+kind = orbitfabric.scenario_declaration
+declaration_version = 0.1-candidate
+source.scenario_sha256 = SHA-256 of exact consumed Scenario source bytes
+```
+
+Run `orbitfabric export scenario-declaration PATH --json OUTPUT` to obtain authored normalized Scenario atoms and structured failure diagnostics. Atom correlation is scoped to exact Scenario source SHA-256 plus atom id, not cross-revision stable atom identity. It does not imply host-side execution or native observation.
+
+## Candidate accounting and retained evidence formats
+
+The generic candidate interfaces introduced in Core v1.4.0 have independent wire identities:
+
+```text
+orbitfabric.scenario_projection_accounting / 0.1-candidate
+orbitfabric.evidence_set_manifest / 0.1-candidate
+```
+
+Scenario Projection Accounting is an optional Integration Result `0.2-candidate` artifact. Its producer-owned atom dispositions and exact mappings use an independently versioned payload. Absence means unavailable accounting, not a successful or unsupported projection.
+
+Evidence Set Manifest covers curator-owned retained evidence references, exact byte integrity and typed correlation. Its wire version does not define native execution success or producer-specific evidence meaning.
 
 ## Mission Model version
 
@@ -96,7 +126,7 @@ Conceptual lint example:
 ```json
 {
   "tool": "orbitfabric-lint",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "mission": "demo-3u",
   "model_version": "0.1.0"
 }
@@ -196,7 +226,7 @@ This separation lets the Core input boundary remain stable while integration inv
 
 ## Adapter Management contract format versions
 
-v1.3.0 introduces candidate Adapter Management contracts with their own format identities.
+v1.3.0 introduced candidate Adapter Management contract formats, which remain candidate in Core v1.4.0.
 
 Current formats include:
 
@@ -216,7 +246,7 @@ Which Catalog format does this data product use?
 
 They do not answer which OrbitFabric package release is installed and they do not answer which adapter release is selected.
 
-Core package version `1.3.0` does not promote these candidate format versions to stable.
+Core package version `1.4.0` does not promote these candidate format versions to stable.
 
 ---
 
@@ -225,7 +255,7 @@ Core package version `1.3.0` does not promote these candidate format versions to
 An external adapter has its own release version, for example:
 
 ```text
-orbitfabric/fprime @ 0.1.1
+orbitfabric/fprime @ 0.1.3
 ```
 
 That value is part of exact adapter release identity.
@@ -321,6 +351,8 @@ seven admitted additive FDIR Relationship Manifest families
 
 `v1.3.0` preserves that stable boundary and adds separately classified candidate operation-input and Adapter Management capabilities.
 
+`v1.4.0` adds one public GitHub adapter onboarding route and the candidate Core Interface, Scenario Declaration, Scenario Projection Accounting and Evidence Set formats. None change the existing stable Mission Data Contract classification.
+
 The v1.1.0 dashboard summary, scenario run index, coverage summary and structured expectation additions remain candidate unless separately promoted.
 
 Stability classification is governed by explicit reviewed decisions, not by the mere existence of a file, package release or version token.
@@ -344,7 +376,7 @@ Core in-process ecosystem implementation loading remains out of scope
 
 The stable v1.2 Integration Input Set reinforces that boundary: Core exports the coherent machine-readable input; external packages own target-specific integration logic.
 
-The v1.3 Adapter Management boundary adds a parallel ownership rule:
+The Adapter Management boundary introduced in v1.3 and retained in v1.4 adds a parallel ownership rule:
 
 ```text
 Core owns exact adapter identity, desired/actual state and lifecycle semantics
@@ -352,27 +384,34 @@ provider-specific Release Sources own provider acquisition
 ResolvedAdapterRelease is the handoff
 ```
 
-Provider implementation versioning is therefore separate from Core versioning and separate from adapter release versioning.
+Provider implementation versioning is therefore separate from Core versioning and separate from adapter release versioning. Core v1.4.0 composes the separate GitHub Release Source v0.1.0 at the CLI boundary without absorbing GitHub transport into the Core manager. Catalog commit SHA and content digest are acquisition provenance, not new Mission Model identity.
 
 ---
 
 ## Why the versions differ
 
-A valid v1.3 configuration may therefore contain:
+A valid published v1.4.0 product environment may contain:
 
 ```text
-OrbitFabric Core package version:            1.3.0
+OrbitFabric Core package version:            1.4.0
 Mission Model version:                       0.1.0
 Mission Snapshot format version:             0.1-candidate
 Integration Input Set format version:        0.1-candidate
+Core Interface Manifest version:             0.1-candidate
+Scenario Declaration version:                0.1-candidate
 Projection Profile contract version:         0.1-candidate
 Integration Package Manifest version:        0.2-candidate
 Integration Result version:                  0.2-candidate
+Scenario Projection Accounting version:      0.1-candidate
+Evidence Set Manifest version:               0.1-candidate
 Adapter Release Descriptor format version:   0.1-candidate
-Adapter Project Lock format version:          0.1-candidate
+Adapter Project Lock format version:         0.1-candidate
 Adapter Catalog format version:               0.1-candidate
-Selected F Prime adapter release version:    0.1.1
+GitHub Release Source product version:       0.1.0
+Selected F Prime adapter release version:    0.1.3
 ```
+
+This illustrates different identity and compatibility dimensions, not that each optional artifact was actually generated or that any native adapter was executed.
 
 There is no contradiction.
 
